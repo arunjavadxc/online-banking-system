@@ -1,18 +1,24 @@
 package com.banking.user.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.banking.user.entity.User;
+import com.banking.user.service.UserService;
 import com.banking.user.utils.Constants;
 
-@RequestMapping(path = Constants.API_PREFIX_V1)
+@RequestMapping(path = Constants.USER_API_PREFIX)
 @RestController
 public class UserServiceController {
 
-	@GetMapping("/testUser")
-	public String testRest() {
-		return "User Service Running";
+	@Autowired
+	private UserService userService;
+
+	@GetMapping("/{userID}")
+	public User getUserByUserID(long userID) {
+		return userService.findByUserID(userID);
 	}
 
 }
