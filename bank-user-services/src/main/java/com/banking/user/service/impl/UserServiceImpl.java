@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.banking.user.entity.User;
 import com.banking.user.exception.NotFoundException;
+import com.banking.user.model.request.UserSaveRequestDTO;
 import com.banking.user.repository.UserRepository;
 import com.banking.user.service.UserService;
 
@@ -17,8 +18,9 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepo;
 
 	@Override
-	public User saveUser(User user) {
-		return userRepo.save(user);
+	public User saveUser(UserSaveRequestDTO user) {
+		User userEntity = new User();
+		return userRepo.save(userEntity);
 	}
 
 	@Override
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
 		Optional<User> user = userRepo.findById(userID);
 
 		if (user.isEmpty()) {
-			throw new NotFoundException(String.format("User id %s not found", userID));
+			throw new NotFoundException(String.format("User id: %s not found", userID));
 		}
 
 		return user.get();
