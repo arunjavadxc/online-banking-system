@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -27,7 +28,8 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -5509869373313882058L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "m_user_seq_gen")
+	@SequenceGenerator(name = "m_user_seq_gen", sequenceName = "m_user_seq", initialValue = 1000, allocationSize = 1)
 	@Column(name = "user_id")
 	private long userID;
 
