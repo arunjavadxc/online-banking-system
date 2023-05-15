@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.banking.user.entity.UserRoles;
+import com.banking.user.entity.UserRole;
 
 import lombok.Data;
 
@@ -23,6 +23,6 @@ public class UserSaveRequestDTO {
 
 	private boolean userStatus;
 
-	private List<UserRoles> userRoles;
+	private List<UserRole> userRoles;
 
 }
