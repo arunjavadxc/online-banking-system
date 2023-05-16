@@ -1,6 +1,7 @@
 package com.banking.transaction.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,12 @@ public class TransactionController {
 	@GetMapping("/test")
 	public String testMethod() {
 		return "Transaction test controller";
+	}
+
+	//test for github access
+	@PostMapping("/success")
+	public String postSuccess(){
+		return "Success";
 	}
 
 }
