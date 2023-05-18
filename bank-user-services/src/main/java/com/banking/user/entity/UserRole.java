@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import lombok.Data;
 
 @Data
@@ -29,7 +32,8 @@ public class UserRole implements Serializable {
 	@Column(name = "role_name")
 	private String roleName;
 
-	@ManyToMany(mappedBy = "userRoles")
-	private Set<User> users = new HashSet<>();
+//	@ManyToMany(mappedBy = "userRoles")
+//	@JsonIgnoreProperties
+//	private Set<User> users = new HashSet<>();
 
 }

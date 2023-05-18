@@ -5,26 +5,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.banking.user.jwt.JwtAuthenticationEntryPoint;
 import com.banking.user.jwt.JwtRequestFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -34,6 +36,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
+
+
 	private static final String[] ENDPOINTS_WHITELIST = { "/css/**", "/", "/login", "/home", "swagger-ui.html" };
 	private static final String LOGIN_URL = "/login";
 	private static final String LOGOUT_URL = "/logout";
@@ -42,36 +46,57 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
 
-	/*
-	 * @Bean public UserDetailsService userDetailsService() throws Exception { //
-	 * ensure the passwords are encoded properly UserBuilder users = User.builder();
-	 * InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-	 * manager.createUser(
-	 * users.username("admin").password(passwordEncoder.encode("admin")).roles(
-	 * "USER", "ADMIN").build()); return manager; }
-	 */
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
-		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder);
-	}
-
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-
 	@Bean
 	@Order(1)
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.antMatcher("/api/**").authorizeHttpRequests(authorize -> authorize.anyRequest().hasRole("ADMIN"))
-				.httpBasic();
-		http.csrf().disable();
+//		http.antMatcher("/api/**").authorizeHttpRequests(authorize -> authorize.anyRequest().hasRole("ADMIN"))
+//				.httpBasic();
+		 http
+	        .csrf()
+	        .disable()
+	        .authorizeHttpRequests()
+	        .antMatchers(
+	                "/api/v1/authenticate/**",
+	                "/v2/api-docs",
+	                "/v3/api-docs",
+	                "/v3/api-docs/**",
+	                "/swagger-resources",
+	                "/swagger-resources/**",
+	                "/configuration/ui",
+	                "/configuration/security",
+	                "/swagger-ui/**",
+	                "/webjars/**",
+	                "/swagger-ui.html"
+	        ).permitAll()
+	        
+	        .antMatchers("api/**").hasAnyRole("ADMIN", "MANAGER")
+	        
+	        .anyRequest()
+	          .authenticated()
+	        .and()
+	          .sessionManagement()
+	          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+	        .and()
+	        .authenticationProvider(authenticationProvider())
+	        .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+	        .logout()
+	        .logoutUrl("/api/v1/auth/logout")
+//	        .addLogoutHandler(logoutHandler)
+	        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+
 		return http.build();
 	}
+	
+	@Bean
+	AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(jwtUserDetailsService);
+		authProvider.setPasswordEncoder(passwordEncoder);
+		return authProvider;
+	}
 
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
 }
