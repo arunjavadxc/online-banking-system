@@ -1,6 +1,5 @@
 package com.banking.user.service.impl;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	private UserRolesServiceImpl userRolesServiceImpl;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;	
 
 	private UserRequestMapperImpl userRequestMapperImpl = new UserRequestMapperImpl();
 
@@ -32,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	public User saveUser(UserSaveRequestDTO userReqDTO) {
 		User userEntity = userRequestMapperImpl.userReqDTOToUser(userReqDTO);
 		userEntity.setPassword(passwordEncoder.encode(userReqDTO.getPassword()));
-		
+
 		return userRepo.save(userEntity);
 	}
 
