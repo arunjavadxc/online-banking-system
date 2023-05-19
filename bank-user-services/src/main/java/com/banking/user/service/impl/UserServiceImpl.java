@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.banking.user.entity.User;
 import com.banking.user.exception.NotFoundException;
+import com.banking.user.exception.UserAlreadyExistException;
 import com.banking.user.mapper.UserRequestMapperImpl;
 import com.banking.user.model.request.UserSaveRequestDTO;
 import com.banking.user.repository.UserRepository;
@@ -20,15 +21,18 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepo;
 
 	@Autowired
-	private UserRolesServiceImpl userRolesServiceImpl;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;	
+	private PasswordEncoder passwordEncoder;
 
 	private UserRequestMapperImpl userRequestMapperImpl = new UserRequestMapperImpl();
 
 	@Override
 	public User saveUser(UserSaveRequestDTO userReqDTO) {
+
+		if (userRepo.findByEmailID(userReqDTO.getEmailID()) != null) {
+			throw new UserAlreadyExistException(
+					String.format("Email ID :%s is already registered.", userReqDTO.getEmailID()));
+		}
+
 		User userEntity = userRequestMapperImpl.userReqDTOToUser(userReqDTO);
 		userEntity.setPassword(passwordEncoder.encode(userReqDTO.getPassword()));
 
