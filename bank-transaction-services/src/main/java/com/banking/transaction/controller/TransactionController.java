@@ -1,13 +1,16 @@
 package com.banking.transaction.controller;
 
-import com.banking.transaction.dto.transactionRequest;
+import com.banking.transaction.dto.TransactionRequest;
+import com.banking.transaction.dto.TransactionResponse;
 import com.banking.transaction.service.TransactionService;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.banking.transaction.utils.Constants;
+
+import java.util.List;
 
 @RequestMapping(path = Constants.API_PREFIX_V1)
 @RestController
@@ -22,10 +25,16 @@ public class TransactionController {
 
 	//test for github access
 	@PostMapping("/transaction")
-	public String postSuccess(){
+	@ResponseStatus(HttpStatus.CREATED)
+	public String postSuccess(@RequestBody TransactionRequest transactionRequest){
 		log.info("started form controller");
-		service.addDataToDB();
+		log.info(transactionRequest.toString());
+		service.addDataToDB(transactionRequest);
 		return "Success";
 	}
 
+	@PostMapping("/allTransactions/{accountNumber}")
+	public List<TransactionResponse> getAllTransactions(@PathVariable String accountNumber){
+		return service.getAllTransactions(accountNumber);
+	}
 }

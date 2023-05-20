@@ -1,15 +1,14 @@
 package com.banking.transaction.model;
 
-import com.banking.transaction.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -23,6 +22,7 @@ public class TransactionModel {
     private String transactionMode;
     private String creditParty;
     private String debitParty;
-    private TransactionType transactionType;
-    private OffsetDateTime transactionDate;
+    private String billDetails;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date transactionDate;
 }

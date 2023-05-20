@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class transactionRequest {
+public class TransactionRequest {
     private String creditParty;
     private String debitParty;
     private double transactionAmount;
