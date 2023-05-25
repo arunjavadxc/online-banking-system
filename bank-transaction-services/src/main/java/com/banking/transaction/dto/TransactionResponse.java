@@ -10,6 +10,7 @@ import java.util.Date;
 public class TransactionResponse {
     private double amountWithdraw;
     private double amountDeposit;
+    private double balanceAmount;
     private String transactionMode;
     private String description;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

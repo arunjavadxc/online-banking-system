@@ -19,6 +19,8 @@ public class TransactionModel {
     @Id
     private String transactionId;
     private double transactionAmount;
+    private double creditPartyBalance;
+    private double debitPartyBalance;
     private String transactionMode;
     private String creditParty;
     private String debitParty;

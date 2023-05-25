@@ -1,11 +1,15 @@
 package com.banking.transaction.repo;
 
+import com.banking.transaction.Exceptions.InsufficientBalance;
 import com.banking.transaction.dto.TransactionRequest;
 import com.banking.transaction.dto.TransactionResponse;
 import com.banking.transaction.model.TransactionModel;
+import lombok.SneakyThrows;
+import lombok.experimental.StandardException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Comparator;
 import java.util.Date;
@@ -19,13 +23,16 @@ public class TransactionImp {
     @Autowired
     private TransactionRepo transactionRepo;
 
-    public Boolean addDataToDB(TransactionRequest data){
+    public Boolean addDataToDB(TransactionRequest data,double creditPartyBalence,double debitPartyBalence) {
         log.info("Going to add in DB");
+
         TransactionModel transactionModel = TransactionModel.builder()
                 .transactionAmount(data.getTransactionAmount())
                 .transactionMode(data.getTransactionMode())
                 .creditParty(data.getCreditParty())
+                .creditPartyBalance(creditPartyBalence+data.getTransactionAmount())
                 .debitParty(data.getDebitParty())
+                .debitPartyBalance(debitPartyBalence-data.getTransactionAmount())
                 .transactionDate(new Date()).build();
         log.info(transactionModel);
         transactionRepo.save(transactionModel);
@@ -33,13 +40,6 @@ public class TransactionImp {
         return true;
     }
 
-    public List<TransactionResponse> getAllTransactions(String accountNumber) {
-        List<TransactionResponse> credit = getCreditedTransactions(accountNumber);
-        List<TransactionResponse> debit = getDebitedTransactions(accountNumber);
-        List<TransactionResponse> allTransactions = Stream.concat(credit.stream(),debit.stream()).collect(Collectors.toList());
-        return allTransactions.stream().sorted(Comparator.comparing(TransactionResponse::getTransactionDate)).collect(Collectors.toList());
-
-    }
 
     public List<TransactionResponse> getCreditedTransactions(String accountNumber){
         return transactionRepo.findItemByCreditParty(accountNumber).stream()
