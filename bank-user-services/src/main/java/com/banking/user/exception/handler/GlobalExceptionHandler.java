@@ -4,14 +4,14 @@ import java.sql.SQLException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.banking.user.exception.NotFoundException;
 import com.banking.user.exception.UserAlreadyExistException;
 import com.banking.user.utils.Response;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(NotFoundException.class)
