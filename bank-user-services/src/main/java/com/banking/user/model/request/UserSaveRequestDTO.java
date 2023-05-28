@@ -11,17 +11,17 @@ import lombok.Data;
 @Data
 public class UserSaveRequestDTO {
 
-	@NotEmpty
+//	@NotEmpty
 	private String firstName;
 	private String middleName;
-	@NotEmpty
+//	@NotEmpty
 	private String lastName;
 	@NotEmpty
 	private String emailID;
 	@NotEmpty
 	private String password;
 
-	private boolean userStatus;
+	private boolean userStatus = true;
 
 	private List<UserRole> userRoles;
 
