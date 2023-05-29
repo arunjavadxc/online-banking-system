@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class HandleException {
     @ExceptionHandler(InsufficientBalance.class)
     public ResponseEntity<Response<String>> exNotFoundException(InsufficientBalance ib) {
-        Response<String> response = new Response<>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE.value(), ib.getLocalizedMessage(), null);
+        Response<String> response = new Response<>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE.value(), ib.getLocalizedMessage());
         return new ResponseEntity<>(response, org.springframework.http.HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
     }
 }

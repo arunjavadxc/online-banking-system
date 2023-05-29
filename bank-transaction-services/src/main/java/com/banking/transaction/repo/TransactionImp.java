@@ -4,18 +4,15 @@ import com.banking.transaction.Exceptions.InsufficientBalance;
 import com.banking.transaction.dto.TransactionRequest;
 import com.banking.transaction.dto.TransactionResponse;
 import com.banking.transaction.model.TransactionModel;
-import lombok.SneakyThrows;
-import lombok.experimental.StandardException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 @Repository
 @Log4j2
@@ -23,7 +20,7 @@ public class TransactionImp {
     @Autowired
     private TransactionRepo transactionRepo;
 
-    public Boolean addDataToDB(TransactionRequest data,double creditPartyBalence,double debitPartyBalence) {
+    public TransactionModel addToDB(TransactionRequest data,double creditPartyBalence,double debitPartyBalence) {
         log.info("Going to add in DB");
 
         TransactionModel transactionModel = TransactionModel.builder()
@@ -37,7 +34,7 @@ public class TransactionImp {
         log.info(transactionModel);
         transactionRepo.save(transactionModel);
 //        log.info("-------- Data from DB --------");
-        return true;
+        return transactionModel;
     }
 
 
@@ -49,6 +46,7 @@ public class TransactionImp {
                             .description(a.getTransactionId()+" / "+a.getDebitParty())
                             .amountDeposit(a.getTransactionAmount())
                             .transactionMode(a.getTransactionMode())
+                            .balanceAmount(a.getCreditPartyBalance())
                             .transactionDate(a.getTransactionDate()).build();
                 })
                 .collect(Collectors.toList());
@@ -61,6 +59,7 @@ public class TransactionImp {
                             .description(a.getTransactionId()+" / "+a.getCreditParty()+a.getBillDetails())
                             .amountWithdraw(a.getTransactionAmount())
                             .transactionMode(a.getTransactionMode())
+                            .balanceAmount(a.getDebitPartyBalance())
                             .transactionDate(a.getTransactionDate()).build();
                 })
                 .collect(Collectors.toList());
