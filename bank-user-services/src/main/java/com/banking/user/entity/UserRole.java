@@ -10,14 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "m_user_roles")
+@EqualsAndHashCode(exclude = { "users" })
 public class UserRole implements Serializable {
 
 	/**
@@ -32,8 +33,8 @@ public class UserRole implements Serializable {
 	@Column(name = "role_name")
 	private String roleName;
 
-//	@ManyToMany(mappedBy = "userRoles")
-//	@JsonIgnoreProperties
-//	private Set<User> users = new HashSet<>();
+	@ManyToMany(mappedBy = "userRoles")
+	@JsonIgnore
+	private Set<User> users = new HashSet<>();
 
 }

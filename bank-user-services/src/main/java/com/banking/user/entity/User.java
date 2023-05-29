@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,14 +15,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "m_user_dtls")
+@EqualsAndHashCode(exclude = {"userRoles"})
 public class User implements Serializable {
 
 	/**
@@ -46,7 +44,7 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "email_id")
+	@Column(name = "email_id", unique = true)
 	private String emailID;
 
 	@Column(name = "password_v")
@@ -55,9 +53,8 @@ public class User implements Serializable {
 	@Column(name = "user_status")
 	private boolean userStatus;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "mp_user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	@JsonIgnoreProperties
 	private Set<UserRole> userRoles = new HashSet<>();
 	
 }
