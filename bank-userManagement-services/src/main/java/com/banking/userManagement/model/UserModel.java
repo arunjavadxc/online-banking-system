@@ -1,5 +1,6 @@
 package com.banking.userManagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class UserModel {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String accountNumber;
