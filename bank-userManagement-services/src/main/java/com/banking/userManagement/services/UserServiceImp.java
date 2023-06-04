@@ -2,8 +2,11 @@ package com.banking.userManagement.services;
 
 import com.banking.userManagement.dto.AddUserResponse;
 import com.banking.userManagement.dto.UserRequest;
+import com.banking.userManagement.exceptions.UserNotFoundException;
 import com.banking.userManagement.model.UserModel;
 import com.banking.userManagement.repo.userRepoImp;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 @Service
+@Slf4j
 public class UserServiceImp implements UserService{
     @Autowired
     private userRepoImp userRepo;
@@ -26,12 +31,20 @@ public class UserServiceImp implements UserService{
 
     @Override
     public UserModel findUser(String accountNumber) {
-        return userRepo.users(accountNumber);
+        UserModel userDetails = userRepo.users(accountNumber);
+        if (userDetails==null)
+            throw new UserNotFoundException("This " + accountNumber + " Account Number is not valid");
+        return userDetails;
     }
 
     @Override
+    @SneakyThrows
     public Map<String,Double> currentBalance(List<String> accountNumbers) {
-        return accountNumbers.stream()
-                .collect(Collectors.toMap(a->a,a->findUser(a).getBalance()));
+       return accountNumbers.stream()
+                .collect(Collectors.toMap(a->a,a-> {
+                    if (findUser(a) == null)
+                            throw new UserNotFoundException("This " + a + " Account Number is not valid");
+                    else return findUser(a).getBalance();
+                }));
     }
 }
