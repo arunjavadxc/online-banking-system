@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Component
 @Table(name = "users")
 public class UserModel {
     @Id

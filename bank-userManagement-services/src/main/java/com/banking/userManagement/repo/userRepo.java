@@ -14,7 +14,7 @@ public interface userRepo extends JpaRepository<UserModel,String> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE users u SET u.balance = ?1 WHERE u.username = ?2")
+    @Query("UPDATE UserModel u SET u.balance = ?1 WHERE u.accountNumber = ?2")
     Integer updateBalance( double balance,  String accountNumber);
 }
 

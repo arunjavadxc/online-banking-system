@@ -38,10 +38,10 @@ public class userRepoImp {
     }
 
     public Integer updateBalance(Map<String,Double> balance){
-        int i=0;
+        int numberOfAccountsUpdated=0;
         for(Map.Entry<String,Double> bal:balance.entrySet()){
-           i= userRepo.updateBalance(bal.getValue(),bal.getKey());
+            numberOfAccountsUpdated+= userRepo.updateBalance(bal.getValue(),bal.getKey());
         }
-        return i;
+        return numberOfAccountsUpdated;
     }
 }
