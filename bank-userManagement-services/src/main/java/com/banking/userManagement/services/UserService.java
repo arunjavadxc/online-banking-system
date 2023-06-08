@@ -15,4 +15,6 @@ public interface UserService {
     UserModel findUser(String accountNumber);
 
     Map<String,Double> currentBalance(List<String> accountNumbers);
+
+    Integer updateBalance(Map<String,Double> balance);
 }

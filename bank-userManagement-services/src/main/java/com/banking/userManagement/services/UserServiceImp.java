@@ -47,4 +47,9 @@ public class UserServiceImp implements UserService{
                     else return findUser(a).getBalance();
                 }));
     }
+
+    @Override
+    public Integer updateBalance(Map<String, Double> balance) {
+        return userRepo.updateBalance(balance);
+    }
 }

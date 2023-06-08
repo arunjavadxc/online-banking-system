@@ -35,9 +35,11 @@ public class UserController {
     }
 
     @PostMapping("/User/balance")
-    public Map<String,Double> updateBalance(@RequestBody Map<String,Double> user)
+    public Integer updateBalance(@RequestBody Map<String,Double> user)
     {
-        log.info(user.toString());
-        return user;
+        for(Map.Entry<String,Double> User:user.entrySet()) {
+            log.info("Key = {}, Value = {}", User.getKey(), User.getValue());
+        }
+        return userService.updateBalance(user);
     }
 }

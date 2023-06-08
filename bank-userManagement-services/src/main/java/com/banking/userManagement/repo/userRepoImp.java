@@ -37,11 +37,11 @@ public class userRepoImp {
         return User;
     }
 
-//    public Map<String,Double> updateBalance(Map<String,Double> balance){
-//        int i=0;
-//        for(Map.Entry<String,Double> bal:balance.entrySet()){
-//            userRepo.updateBalance(bal.getValue(),bal.getKey());
-//        }
-//        return null;
-//    }
+    public Integer updateBalance(Map<String,Double> balance){
+        int i=0;
+        for(Map.Entry<String,Double> bal:balance.entrySet()){
+           i= userRepo.updateBalance(bal.getValue(),bal.getKey());
+        }
+        return i;
+    }
 }
