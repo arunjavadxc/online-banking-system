@@ -44,7 +44,7 @@ public class UserServiceImp implements UserService{
                 .collect(Collectors.toMap(a->a,a-> {
                     if (findUser(a) == null)
                             throw new UserNotFoundException("This " + a + " Account Number is not valid");
-                    else return findUser(a).getBalance();
+                    else return this.findUser(a).getBalance();
                 }));
     }
 

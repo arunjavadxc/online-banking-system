@@ -29,21 +29,31 @@ public class TransactionServiceImp implements TransactionService{
     public TransactionReqResponse addTransacrtion(TransactionRequest data){
         log.info("Entered into Service layer");
         //check users are present and get balance from them and transfer to addDataToDB
+        log.info(data.getCreditParty());
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<Map> balance = rest.getForEntity("http://127.0.0.1:8081/api/v1/users/balance/" + data.getCreditParty() + "," + data.getDebitParty(), Map.class);
-        log.info("credit party balance : "+Double.parseDouble(balance.getBody().get(data.getCreditParty()).toString()));
-        log.info("Debit party balance : "+Double.parseDouble(balance.getBody().get(data.getDebitParty()).toString()));
-        double creditPartyBalance = 1000;
-        double debitPartyBalance = 1000;
+        ResponseEntity<Map> balance = rest.getForEntity("http://127.0.0.1:8089/api/v1/users/balance/" + data.getCreditParty() + "," + data.getDebitParty(), Map.class);
+
+        double creditPartyBalance = Double.parseDouble(balance.getBody().get(data.getCreditParty()).toString());
+        double debitPartyBalance = Double.parseDouble(balance.getBody().get(data.getDebitParty()).toString());
+        log.info("Debit party balance : "+debitPartyBalance);
+        log.info("credit party balance : "+creditPartyBalance);
+
         TransactionModel transResponse = addDataToDB(data, creditPartyBalance, debitPartyBalance);
+        Map<String,Double> currentBalance =Map.of(transResponse.getCreditParty(),
+                transResponse.getCreditPartyBalance(),
+                transResponse.getDebitParty(),
+                transResponse.getDebitPartyBalance());
         //update current balance
-        return TransactionReqResponse.builder().transactionAmount(transResponse.getTransactionAmount())
-                .balance(transResponse.getDebitPartyBalance())
-                .receiver(transResponse.getCreditParty()).build();
+        ResponseEntity<Integer> updatedBalance = rest.postForEntity("http://127.0.0.1:8089/api/v1/users/balance/",currentBalance, Integer.class);
+        if(updatedBalance.getBody()==2) {
+            return TransactionReqResponse.builder().transactionAmount(transResponse.getTransactionAmount())
+                    .balance(transResponse.getDebitPartyBalance())
+                    .receiver(transResponse.getCreditParty()).build();
+        }
+        else return null;
     }
     @SneakyThrows
     public TransactionModel addDataToDB(TransactionRequest data, double creditPartyBalance, double debitPartyBalance){
-
         if(debitPartyBalance<data.getTransactionAmount())
             throw new InsufficientBalance(data.getDebitParty()+" You don't have sufficient balance");
         return transaction.addToDB(data, creditPartyBalance, debitPartyBalance);
