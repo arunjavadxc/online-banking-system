@@ -4,7 +4,8 @@ import com.banking.transaction.Exceptions.InsufficientBalance;
 import com.banking.transaction.dto.TransactionRequest;
 import com.banking.transaction.dto.TransactionResponse;
 import com.banking.transaction.model.TransactionModel;
-import lombok.extern.log4j.Log4j2;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 
 @Repository
-@Log4j2
+@Slf4j
 public class TransactionImp {
     @Autowired
     private TransactionRepo transactionRepo;
@@ -31,7 +32,7 @@ public class TransactionImp {
                 .debitParty(data.getDebitParty())
                 .debitPartyBalance(debitPartyBalence-data.getTransactionAmount())
                 .transactionDate(new Date()).build();
-        log.info(transactionModel);
+        log.info(transactionModel.toString());
         transactionRepo.save(transactionModel);
 //        log.info("-------- Data from DB --------");
         return transactionModel;

@@ -19,22 +19,22 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @GetMapping("/User/{accountNumber}")
+    @GetMapping("/users/{accountNumber}")
     public UserModel users(@PathVariable String accountNumber){
        return userService.findUser(accountNumber);
     }
 
-    @GetMapping("/User/balance/{accountNumbers}")
+    @GetMapping("/users/balance/{accountNumbers}")
     public Map<String,Double> balanceOfUsers(@PathVariable List<String> accountNumbers)
     {
         return userService.currentBalance(accountNumbers);
     }
-    @PostMapping("/User")
+    @PostMapping("/users")
     public AddUserResponse addUser(@RequestBody UserRequest user){
        return userService.addUser(user);
     }
 
-    @PostMapping("/User/balance")
+    @PostMapping("/users/balance")
     public Integer updateBalance(@RequestBody Map<String,Double> user)
     {
         for(Map.Entry<String,Double> User:user.entrySet()) {
