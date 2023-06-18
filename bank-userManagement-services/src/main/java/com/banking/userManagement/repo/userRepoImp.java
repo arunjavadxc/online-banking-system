@@ -45,4 +45,9 @@ public class userRepoImp {
         }
         return numberOfAccountsUpdated;
     }
+
+    public Integer deleteUser(String accountNumber) {
+       userRepo.deleteByaccountNumber(accountNumber);
+       return 1;
+    }
 }

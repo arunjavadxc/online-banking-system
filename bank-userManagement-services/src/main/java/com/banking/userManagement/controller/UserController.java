@@ -42,4 +42,8 @@ public class UserController {
         }
         return userService.updateBalance(user);
     }
+    @DeleteMapping("/users/{accountNumber}")
+    public Integer deleteUser(@PathVariable String accountNumber){
+        return userService.deleteUser(accountNumber);
+    }
 }

@@ -52,4 +52,10 @@ public class UserServiceImp implements UserService{
     public Integer updateBalance(Map<String, Double> balance) {
         return userRepo.updateBalance(balance);
     }
+
+    @Override
+    public Integer deleteUser(String accountNumber) {
+        return userRepo.deleteUser(accountNumber);
+
+    }
 }

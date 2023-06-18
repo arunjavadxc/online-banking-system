@@ -17,4 +17,6 @@ public interface UserService {
     Map<String,Double> currentBalance(List<String> accountNumbers);
 
     Integer updateBalance(Map<String,Double> balance);
+
+    Integer deleteUser(String accountNumber);
 }

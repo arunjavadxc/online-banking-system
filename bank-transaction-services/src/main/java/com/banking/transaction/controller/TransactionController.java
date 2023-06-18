@@ -23,7 +23,7 @@ public class TransactionController {
 
 	//To add user transactions
 
-	@PostMapping("/transaction")
+	@PostMapping("/transactions")
 	@ResponseStatus(HttpStatus.CREATED)
 	public TransactionReqResponse postSuccess(@RequestBody TransactionRequest transactionRequest){
 		log.info("started form controller");
