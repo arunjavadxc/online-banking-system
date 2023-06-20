@@ -28,6 +28,7 @@ public class LoanController {
 	
 	@PostMapping("/save")
 	public void saveLoan(@RequestBody Loan loan) {
+		System.out.println(loan.toString());
 		loanService.saveLoan(loan);
 	}
 	

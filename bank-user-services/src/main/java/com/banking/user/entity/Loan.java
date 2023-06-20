@@ -6,14 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Table(name = "loan")
 public class Loan {
 	
@@ -25,4 +23,26 @@ public class Loan {
 	private int duration;
 	private double monthlyEMI;
 	private double interestRate;
+	
+	/*
+	 * public long getLoanId() { return loanId; } public void setLoanId(long loanId)
+	 * { this.loanId = loanId; } public String getCustomerName() { return
+	 * customerName; } public void setCustomerName(String customerName) {
+	 * this.customerName = customerName; } public double getLoanAmount() { return
+	 * loanAmount; } public void setLoanAmount(double loanAmount) { this.loanAmount
+	 * = loanAmount; } public int getDuration() { return duration; } public void
+	 * setDuration(int duration) { this.duration = duration; } public double
+	 * getMonthlyEMI() { return monthlyEMI; } public void setMonthlyEMI(double
+	 * monthlyEMI) { this.monthlyEMI = monthlyEMI; } public double getInterestRate()
+	 * { return interestRate; } public void setInterestRate(double interestRate) {
+	 * this.interestRate = interestRate; }
+	 */
+	
+	  @Override 
+	  public String toString() { return "Loan [loanId=" + loanId +
+	  ", customerName=" + customerName + ", loanAmount=" + loanAmount +
+	  ", duration=" + duration + ", monthlyEMI=" + monthlyEMI + ", interestRate=" +
+	  interestRate + "]"; }
+	 
+	
 }
