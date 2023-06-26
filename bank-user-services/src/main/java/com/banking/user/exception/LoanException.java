@@ -5,5 +5,4 @@ public class LoanException extends RuntimeException {
 	public LoanException(String error) {
 		super(error);
 	}
-
 }

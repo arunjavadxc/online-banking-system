@@ -9,29 +9,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.banking.user.entity.Loan;
-import com.banking.user.service.LoanService;
+import com.banking.user.entity.CreditCard;
+import com.banking.user.service.CreditCardService;
 
 @RestController
-@RequestMapping("/loans")
-public class LoanController {
-
+@RequestMapping("/creditcard")
+public class CreditCardController {
+	
 	@Autowired
-	private LoanService loanService;
+	private CreditCardService creditCardService;
 	
 	@GetMapping("/{id}")
-	public Loan getLoanById(@PathVariable long id) {
-		return loanService.getLoanById(id);
+	public CreditCard getCreditCardById(@PathVariable long id) {
+		return creditCardService.getCreditCardById(id);
 	}
 	
 	@PostMapping("/save")
-	public void saveLoan(@RequestBody Loan loan) {
-		loanService.saveLoan(loan);
+	public void saveCreditCard(@RequestBody CreditCard creditCard) {
+		creditCardService.saveCreditCard(creditCard);;
 	}
 	
 	@DeleteMapping("/{id}")
 	public void deleteLoan(@PathVariable long id) {
-		loanService.deleteLoan(id);
+		creditCardService.deleteCreditCard(id);
 	}
 }
-
