@@ -1,5 +1,6 @@
 package com.banking.user.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,12 +16,24 @@ public class Loan {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "loan_id")
 	private long loanId;
+	
+	@Column(name = "customer_name")
 	private String customerName;
+	
+	@Column(name = "loan_amount")
 	private double loanAmount;
+	
+	@Column(name = "duration")
 	private int duration;
+	
+	@Column(name = "monthly_emi")
 	private double monthlyEMI;
+	
+	@Column(name = "interest_rate")
 	private double interestRate;
+	
 	public long getLoanId() {
 		return loanId;
 	}

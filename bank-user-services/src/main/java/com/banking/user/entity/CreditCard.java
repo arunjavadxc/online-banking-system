@@ -2,6 +2,7 @@ package com.banking.user.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +18,16 @@ public class CreditCard {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "creditcard_id")
 	private long creditcardId;
+	
+	@Column(name = "creditcard_number")
 	private String creditcardNumber;
+	
+	@Column(name = "creditcard_owner")
 	private String creditcardOwner;
+	
+	@Column(name = "expiration_date")
 	private LocalDate expirationDate;
 	
 	public long getCreditcardId() {
