@@ -7,11 +7,17 @@ import com.banking.transaction.dto.TransactionResponse;
 import com.banking.transaction.model.TransactionModel;
 import com.banking.transaction.repo.TransactionImp;
 
+import com.banking.transaction.utils.Response;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Comparator;
@@ -25,18 +31,17 @@ import java.util.stream.Stream;
 public class TransactionServiceImp implements TransactionService{
     @Autowired
     private TransactionImp transaction;
-
+    @Value("${user.balance.url}")
+    private String balanceBaseURL;
+    @Autowired
+    private RestTemplate rest;
     public TransactionReqResponse addTransacrtion(TransactionRequest data){
         log.info("Entered into Service layer");
         //check users are present and get balance from them and transfer to addDataToDB
-        log.info(data.getCreditParty());
-        RestTemplate rest = new RestTemplate();
-        ResponseEntity<Map> balance = rest.getForEntity("http://127.0.0.1:8089/api/v1/users/balance/" + data.getCreditParty() + "," + data.getDebitParty(), Map.class);
-
-        double creditPartyBalance = Double.parseDouble(balance.getBody().get(data.getCreditParty()).toString());
-        double debitPartyBalance = Double.parseDouble(balance.getBody().get(data.getDebitParty()).toString());
-        log.info("Debit party balance : "+debitPartyBalance);
-        log.info("credit party balance : "+creditPartyBalance);
+//        RestTemplate rest = new RestTemplate();
+        Map balance = getBalance(data.getCreditParty(), data.getDebitParty());
+        double creditPartyBalance = Double.parseDouble(balance.get(data.getCreditParty()).toString());
+        double debitPartyBalance = Double.parseDouble(balance.get(data.getDebitParty()).toString());
 
         TransactionModel transResponse = addDataToDB(data, creditPartyBalance, debitPartyBalance);
         Map<String,Double> currentBalance =Map.of(transResponse.getCreditParty(),
@@ -44,8 +49,7 @@ public class TransactionServiceImp implements TransactionService{
                 transResponse.getDebitParty(),
                 transResponse.getDebitPartyBalance());
         //update current balance
-        ResponseEntity<Integer> updatedBalance = rest.postForEntity("http://127.0.0.1:8089/api/v1/users/balance/",currentBalance, Integer.class);
-        if(updatedBalance.getBody()==2) {
+        if(updateBalance(currentBalance).getBody()==2) {
             return TransactionReqResponse.builder().transactionAmount(transResponse.getTransactionAmount())
                     .balance(transResponse.getDebitPartyBalance())
                     .receiver(transResponse.getCreditParty()).build();
@@ -53,7 +57,19 @@ public class TransactionServiceImp implements TransactionService{
         else return null;
     }
     @SneakyThrows
-    public TransactionModel addDataToDB(TransactionRequest data, double creditPartyBalance, double debitPartyBalance){
+    private Map getBalance(String creditAccountNumber, String debitAccountNumber){
+        StringBuilder baseURI = new StringBuilder(balanceBaseURL).append("/").append(creditAccountNumber).append(",").append(debitAccountNumber);
+
+            return rest.getForEntity(baseURI.toString(), Map.class).getBody();
+
+
+
+    }
+    private ResponseEntity<Integer> updateBalance(Map<String,Double> currentBalance){
+        return rest.postForEntity(balanceBaseURL,currentBalance, Integer.class);
+    }
+    @SneakyThrows
+    private TransactionModel addDataToDB(TransactionRequest data, double creditPartyBalance, double debitPartyBalance){
         if(debitPartyBalance<data.getTransactionAmount())
             throw new InsufficientBalance(data.getDebitParty()+" You don't have sufficient balance");
         return transaction.addToDB(data, creditPartyBalance, debitPartyBalance);

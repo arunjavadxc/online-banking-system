@@ -4,7 +4,9 @@ package com.banking.userManagement.utils;
 import java.util.Random;
 
 public class AccountNumberGenerator {
+    private AccountNumberGenerator(){
 
+    }
     public static String randomGenerator(){
         Random random = new Random();
         StringBuilder accountNumber = new StringBuilder(String.valueOf(Constants.IFSC));

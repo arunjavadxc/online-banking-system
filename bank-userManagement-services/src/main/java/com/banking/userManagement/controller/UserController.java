@@ -7,6 +7,8 @@ import com.banking.userManagement.services.UserService;
 import com.banking.userManagement.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,12 +37,12 @@ public class UserController {
     }
 
     @PostMapping("/users/balance")
-    public Integer updateBalance(@RequestBody Map<String,Double> user)
+    public ResponseEntity updateBalance(@RequestBody Map<String,Double> user)
     {
         for(Map.Entry<String,Double> User:user.entrySet()) {
             log.info("Key = {}, Value = {}", User.getKey(), User.getValue());
         }
-        return userService.updateBalance(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.updateBalance(user));
     }
     @DeleteMapping("/users/{accountNumber}")
     public Integer deleteUser(@PathVariable String accountNumber){

@@ -7,6 +7,7 @@ import com.banking.userManagement.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class userRepoImp {
         userRepo.save(User);
         return User;
     }
-
+    @Transactional
     public Integer updateBalance(Map<String,Double> balance){
         int numberOfAccountsUpdated=0;
         for(Map.Entry<String,Double> bal:balance.entrySet()){
@@ -45,9 +46,9 @@ public class userRepoImp {
         }
         return numberOfAccountsUpdated;
     }
-
+    @Transactional
     public Integer deleteUser(String accountNumber) {
-       userRepo.deleteByaccountNumber(accountNumber);
-       return 1;
+       return userRepo.deleteByaccountNumber(accountNumber);
+
     }
 }

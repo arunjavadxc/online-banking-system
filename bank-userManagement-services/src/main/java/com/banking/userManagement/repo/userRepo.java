@@ -13,12 +13,9 @@ public interface userRepo extends JpaRepository<UserModel,String> {
     public UserModel findByaccountNumber(String accountNumber);
 
     @Modifying
-    @Transactional
     @Query("UPDATE UserModel u SET u.balance = ?1 WHERE u.accountNumber = ?2")
     Integer updateBalance( double balance,  String accountNumber);
 
-    @Transactional
-
-    void deleteByaccountNumber(String accountNumber);
+    Integer deleteByaccountNumber(String accountNumber);
 }
 
