@@ -30,6 +30,7 @@ public class TransactionImp {
                 .creditParty(data.getCreditParty())
                 .creditPartyBalance(creditPartyBalence+data.getTransactionAmount())
                 .debitParty(data.getDebitParty())
+                .billDetails(data.getBillDetails())
                 .debitPartyBalance(debitPartyBalence-data.getTransactionAmount())
                 .transactionDate(new Date()).build();
         log.info(transactionModel.toString());

@@ -14,4 +14,5 @@ public class TransactionRequest {
     private String debitParty;
     private double transactionAmount;
     private String transactionMode;
+    private String billDetails;
 }
