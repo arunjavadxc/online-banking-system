@@ -16,6 +16,9 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { HomeComponent } from './components/views/home/home.component';
 import { ForgetpasswordComponent } from './components/views/forgetpassword/forgetpassword.component';
+import { TransactionsComponent } from './components/views/transactions/transactions.component';
+import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
+import { StatementComponent } from './components/views/transactions/statement/statement.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ForgetpasswordComponent } from './components/views/forgetpassword/forge
     FooterComponent,
     HomeComponent,
     SignupComponent,
-    ForgetpasswordComponent
+    ForgetpasswordComponent,
+    TransactionsComponent,
+    TransferComponent,
+    StatementComponent
   ],
   imports: [
     BrowserModule,

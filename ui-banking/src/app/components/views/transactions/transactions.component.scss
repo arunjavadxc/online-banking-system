@@ -1,0 +1,36 @@
+div.addTrans,div.allTrans{
+    border: none;
+    background-color:#fff;
+    box-shadow: 3px 0 3px rgb(45, 198, 170), -.2em 0 0.5em rgb(5, 152, 189);
+    padding:5px;
+    width: 25%;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+}
+div.main{
+    width: 100%;
+}
+div.addTrans{
+    margin: 10% auto auto 15%;
+}
+div.allTrans{
+    margin: 10% auto auto 20%;
+}
+h1{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    padding: 1rem;
+    font-size: 1.7rem;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+}
+img{
+    display: inline-block;
+    height: 4em;
+    width: 4em;
+}
