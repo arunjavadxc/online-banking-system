@@ -20,6 +20,7 @@ import { TransactionsComponent } from './components/views/transactions/transacti
 import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
