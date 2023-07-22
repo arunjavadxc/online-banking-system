@@ -19,6 +19,7 @@ import { ForgetpasswordComponent } from './components/views/forgetpassword/forge
 import { TransactionsComponent } from './components/views/transactions/transactions.component';
 import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
+import { BillComponent } from './components/transactions/bill/bill.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { StatementComponent } from './components/views/transactions/statement/st
     ForgetpasswordComponent,
     TransactionsComponent,
     TransferComponent,
-    StatementComponent
+    StatementComponent,
+    BillComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ div.addTrans,div.allTrans{
 }
 div.main{
     width: 100%;
+    display: flexbox;
+    justify-content:space-evenly;
 }
 div.addTrans{
     margin: 10% auto auto 15%;
