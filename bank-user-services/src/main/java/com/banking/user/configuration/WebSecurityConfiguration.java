@@ -1,5 +1,9 @@
 package com.banking.user.configuration;
 
+import java.util.Collections;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +20,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.banking.user.jwt.JwtRequestFilter;
 
@@ -47,8 +53,8 @@ public class WebSecurityConfiguration {
 	@Order(1)
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeHttpRequests().antMatchers(ENDPOINTS_WHITELIST).permitAll()
-				.antMatchers("api/**").hasAnyRole("ADMIN", "MANAGER")
+		http.csrf().disable().authorizeHttpRequests().antMatchers(ENDPOINTS_WHITELIST).permitAll().antMatchers("api/**")
+				.hasAnyRole("ADMIN", "MANAGER")
 
 				.anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -57,6 +63,21 @@ public class WebSecurityConfiguration {
 				.logoutUrl("/api/v1/auth/logout")
 //	        .addLogoutHandler(logoutHandler)
 				.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+
+		// Disable cors
+		http.cors().configurationSource(new CorsConfigurationSource() {
+
+			@Override
+			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+				CorsConfiguration corsConfiguration = new CorsConfiguration();
+				corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:4200/"));
+				corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
+				corsConfiguration.setAllowCredentials(true);
+				corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+				corsConfiguration.setMaxAge(3600L);
+				return corsConfiguration;
+			}
+		});
 
 		return http.build();
 	}
