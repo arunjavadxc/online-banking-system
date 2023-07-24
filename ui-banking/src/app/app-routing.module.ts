@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/views/dashboard/dashboard.compo
 import { HomeComponent } from './components/views/home/home.component';
 import { SignupComponent } from './components/views/signup/signup.component';
 import { ForgetpasswordComponent } from './components/views/forgetpassword/forgetpassword.component';
+import { LoanComponent } from './components/views/loan/loan.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -14,9 +15,13 @@ const routes: Routes = [
   { path: 'forgetpwd', component: ForgetpasswordComponent },
   {
     path: 'home', component: HomeComponent,
-    children: [{
-      path: 'dashboard', component: DashboardComponent
-    }]
+    children: [
+      {
+        path: 'dashboard', component: DashboardComponent
+      },
+      {
+        path: 'loan', component: LoanComponent
+      }]
   },
 ];
 
