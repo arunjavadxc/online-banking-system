@@ -1,18 +1,28 @@
 <main>
     <h1>Transfer Money</h1>
     <form (ngSubmit)="onSubmit()">
-        <div class="form-group"class="form-group">
-            <label for="senderAccNo" class="form-label">Account Number</label>
-            <input type="text" name="senderAccountNumber" [(ngModel)]="formData.creditParty" id="senderAccNo" required>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="senderAccNo" class="input-group-text">Account Number :</label>
+            </div>
+            <input type="text" class="form-control" name="senderAccountNumber" aria-describedby="basic-addon3" [(ngModel)]="formData.creditParty" id="senderAccNo" required>
         </div>
-        <div class="form-group">
-            <label for="amount" class="form-label">Amount</label>
-            <input type="number" name="Amount" [(ngModel)]="formData.transactionAmount" id="amount" required>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">            
+                <label for="amount" class="input-group-text">Amount </label>
+                <label for="Amount" class="input-group-text">$</label>
+            </div>
+            <input type="number" class="form-control" name="Amount" [(ngModel)]="formData.transactionAmount" id="amount" required>
         </div>
-        <div class="form-group">
-            <label for="Tmode" class="form-label">transaction Mode</label>
-            <input type="text" name="Tmode" [(ngModel)]="formData.transactionMode" id="Tmode" required>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="Tmode" class="input-group-text">Transaction Mode :</label>
+                
+            </div>
+            <input type="text" name="Tmode" class="form-control" [(ngModel)]="formData.transactionMode" id="Tmode" required>
         </div>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <div class="text-right">
+        <button type="submit" class="btn btn-outline-success">Send</button>
+        </div>
     </form>
 </main>

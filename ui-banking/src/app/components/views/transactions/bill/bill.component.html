@@ -1,0 +1,14 @@
+<main>
+    <h1>Bill</h1>
+    <form (ngSubmit)="onSubmit()">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">            
+                <label for="servNum" class="input-group-text">serviceNumber </label>
+            </div>
+            <input type="number" class="form-control" name="servNum" [(ngModel)]="billRequest.serviceNumber" id="amount" required>
+        </div>
+        <div class="text-right">
+        <button type="submit" class="btn btn-outline-success">Send</button>
+        </div>
+    </form>
+</main>
