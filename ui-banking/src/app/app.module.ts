@@ -19,8 +19,8 @@ import { ForgetpasswordComponent } from './components/views/forgetpassword/forge
 import { TransactionsComponent } from './components/views/transactions/transactions.component';
 import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
-import { BillComponent } from './components/transactions/bill/bill.component';
-
+import { FormsModule } from '@angular/forms';
+import { BillComponent } from './components/views/transactions/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { BillComponent } from './components/transactions/bill/bill.component';
     TransactionsComponent,
     TransferComponent,
     StatementComponent,
-    BillComponent
+    BillComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +45,8 @@ import { BillComponent } from './components/transactions/bill/bill.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,23 +1,20 @@
-div.addTrans,div.allTrans{
+div.addTrans,div.statement,div.bill{
     border: none;
     background-color:#fff;
     box-shadow: 3px 0 3px rgb(45, 198, 170), -.2em 0 0.5em rgb(5, 152, 189);
     padding:5px;
-    width: 25%;
+    margin-top: 6%;
+    width: 20%;
     vertical-align: middle;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 div.main{
     width: 100%;
-    display: flexbox;
-    justify-content:space-evenly;
-}
-div.addTrans{
-    margin: 10% auto auto 15%;
-}
-div.allTrans{
-    margin: 10% auto auto 20%;
+    display: flex;
+    justify-content: space-evenly ;
+    align-items:baseline;
 }
 h1{
     text-align: center;
@@ -25,7 +22,7 @@ h1{
 a{
     text-decoration: none;
     padding: 1rem;
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     text-align: center;
     display: block;
     margin: 0 auto;
@@ -33,6 +30,6 @@ a{
 }
 img{
     display: inline-block;
-    height: 4em;
-    width: 4em;
+    height: 2em;
+    width: 2em;
 }

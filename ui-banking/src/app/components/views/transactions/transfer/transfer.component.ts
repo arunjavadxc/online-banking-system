@@ -9,11 +9,12 @@ import { transfer } from 'src/app/models/transfer';
   
 })
 export class TransferComponent {
-  formData : transfer
+  formData : transfer = new transfer();
   constructor(private http:HttpClient) { }
   onSubmit() {
     const apiEndpoint = 'http://127.0.0.1:8081/api/v1/transactions'; 
     this.formData.debitParty='1432648625'
+    console.log(this.formData)
     // Make the HTTP POST request
     this.http.post(apiEndpoint, this.formData).subscribe(
       (response) => {
