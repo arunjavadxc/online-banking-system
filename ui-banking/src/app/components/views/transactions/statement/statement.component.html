@@ -1,24 +1,31 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">S.no</th>
-            <th scope="col" class="col-md-1">Date</th>
-            <th scope="col">Mode</th>
-            <th scope="col" class="col-md-4">Description</th>
-            <th scope="col">Deposed</th>
-            <th scope="col">Withdraw</th>
-            <th scope="col">Balance</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let transactions of transactions; let i = index">
-          <th scope="row">{{i+1}}</th>
-          <td>{{transactions.transactionDate | date : 'dd-mm-yyyy'}}</td>
-          <td>{{transactions.transactionMode}}</td>
-          <td>{{transactions.description}}</td>
-          <td>{{transactions.amountDeposit}}</td>
-          <td>{{transactions.amountWithdraw}}</td>
-          <td>{{transactions.balanceAmount}}</td>
-        </tr>
-    </tbody>
-</table>
+<main>
+    <h1>Statement</h1>
+    <div class="button">
+        <button class="btn btn-primary" (click)="exportTable('pdf')">PDF</button>
+        <button class="btn btn-primary" (click)="exportTable('xlsx')">Excel</button>
+    </div>
+    <table class="table table-hover" id="userStatement">
+        <thead>
+            <tr>
+                <th scope="col">S.no</th>
+                <th scope="col" class="col-md-1">Date</th>
+                <th scope="col">Mode</th>
+                <th scope="col" class="col-md-4">Description</th>
+                <th scope="col">Deposed</th>
+                <th scope="col">Withdraw</th>
+                <th scope="col">Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transactions of transactions; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{transactions.transactionDate | date : 'dd-mm-yyyy'}}</td>
+            <td>{{transactions.transactionMode}}</td>
+            <td>{{transactions.description}}</td>
+            <td>{{transactions.amountDeposit}}</td>
+            <td>{{transactions.amountWithdraw}}</td>
+            <td>{{transactions.balanceAmount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</main>

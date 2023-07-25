@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ExportAsModule } from 'ngx-export-as';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,7 +46,8 @@ import { BillComponent } from './components/views/transactions/bill/bill.compone
     HttpClientModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ExportAsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

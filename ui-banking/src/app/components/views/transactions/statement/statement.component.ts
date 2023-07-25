@@ -1,7 +1,7 @@
 import {transactionStatement} from 'src/app/models/transactionStatement';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export-as';
 @Component({
   selector: 'app-statement',
   templateUrl: './statement.component.html',
@@ -9,9 +9,23 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StatementComponent implements OnInit{
   transactions: transactionStatement[] = [];
-  constructor(private http: HttpClient) { }
+  // exportAsConfig: ExportAsConfig = {
+  //   type: 'xls',
+  //   elementIdOrContent: 'userStatement'
+  // }
+  constructor(private http: HttpClient,private exportAsService: ExportAsService) { }
   ngOnInit(): void {
     this.transitionData()
+  }
+  exportTable(type: SupportedExtensions) {
+    const exportConfig: ExportAsConfig = {
+      type: type,
+      elementIdOrContent: 'userStatement', // ID of the table or table content to export
+      
+    };
+    this.exportAsService.save(exportConfig, 'table_export').subscribe(() => {
+      // Save completed
+    });
   }
   url: string = 'http://127.0.0.1:8081/api/v1/transactions/1432648625'
   transitionData(): void {
