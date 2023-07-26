@@ -21,6 +21,7 @@ import { TransferComponent } from './components/views/transactions/transfer/tran
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
 import { FormsModule } from '@angular/forms';
 import { BillComponent } from './components/views/transactions/bill/bill.component';
+import { ProfileComponent } from './components/views/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { BillComponent } from './components/views/transactions/bill/bill.compone
     TransferComponent,
     StatementComponent,
     BillComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

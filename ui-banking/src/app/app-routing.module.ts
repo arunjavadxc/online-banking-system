@@ -10,6 +10,7 @@ import { TransactionsComponent } from './components/views/transactions/transacti
 import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
 import { BillComponent } from './components/views/transactions/bill/bill.component';
+import { ProfileComponent } from './components/views/profile/profile.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
     {path:'transactions',component: TransactionsComponent},
     {path:'transactions/transfer',component: TransferComponent},
     {path:'transactions/statement',component:StatementComponent},
-    {path:'transactions/bill',component:BillComponent}
+    {path:'transactions/bill',component:BillComponent},
+    {path:'profile',component: ProfileComponent}
     ]
   },
 ];
