@@ -58,7 +58,7 @@ public class TransactionImp {
                 .sorted(Comparator.comparing(TransactionModel::getTransactionDate))
                 .map(a->{
                     return TransactionResponse.builder()
-                            .description(a.getTransactionId()+" / "+a.getCreditParty()+a.getBillDetails())
+                            .description(a.getTransactionId()+" / "+a.getCreditParty()+" " + (a.getBillDetails()==null?"":"/ "+a.getBillDetails()))
                             .amountWithdraw(a.getTransactionAmount())
                             .transactionMode(a.getTransactionMode())
                             .balanceAmount(a.getDebitPartyBalance())

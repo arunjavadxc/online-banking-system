@@ -47,6 +47,8 @@ public class TransactionController {
 
 	}
 	// Get all transactions of a user
+
+//	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/transactions/{accountNumber}")
 	public ResponseEntity<?> getAllTransactions(@PathVariable String accountNumber)  {
 		return new ResponseEntity<>(service.getAllTransactions(accountNumber),HttpStatus.OK);

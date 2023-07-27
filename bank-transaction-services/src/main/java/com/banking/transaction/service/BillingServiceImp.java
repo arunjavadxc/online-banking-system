@@ -8,6 +8,8 @@ import com.banking.transaction.repo.BillingRepoImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class BillingServiceImp implements BillingService{
 
@@ -17,13 +19,19 @@ public class BillingServiceImp implements BillingService{
     private TransactionService transactionService;
     @Override
     public String PayBill(BillRequest request) {
-        BillingModel billDetails = billingRepo.getBillingRepo(request.getServiceNumber());
-        TransactionRequest transasction = TransactionRequest.builder().transactionAmount(billDetails.getAmount())
-                .billDetails(billDetails.getCompanyName())
-                .creditParty(billDetails.getCompanyAccountNumber())
-                .debitParty(request.getCustomerAN()).build();
-        TransactionReqResponse TrancactionDetails = transactionService.addTransacrtion(transasction);
-        return TrancactionDetails==null?"Failed":"Success";
+        try {
+            BillingModel billDetails = billingRepo.getBillingRepo(request.getServiceNumber());
+            TransactionRequest transasction = TransactionRequest.builder().transactionAmount(billDetails.getAmount())
+                    .billDetails(billDetails.getCompanyName())
+                    .creditParty(billDetails.getCompanyAccountNumber())
+                    .debitParty(request.getCustomerAN()).build();
+            TransactionReqResponse TrancactionDetails = transactionService.addTransacrtion(transasction);
+            return "Success";
+        }
+        catch (NoSuchElementException e)
+        {
+            return "Failed";
+        }
     }
 
     @Override
