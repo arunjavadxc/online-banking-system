@@ -1,0 +1,24 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+h1{
+    text-align: center;
+}
+form{
+    width:35%;
+    margin: 5% auto;
+    padding:2%;
+    border-radius: 5%;
+}
+.form-group{
+    width:100%;
+}
+.input-group-text{
+    color: #000;
+}

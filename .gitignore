@@ -162,3 +162,5 @@ buildNumber.properties
 
 # static web page directory
 /src/main/resources/static
+*.pack
+*.old

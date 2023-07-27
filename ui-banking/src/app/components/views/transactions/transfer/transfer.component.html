@@ -1,0 +1,29 @@
+<h1>Transfer Fund</h1>
+<main>
+    <h1>Transfer Money</h1>
+    <form (ngSubmit)="onSubmit()">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="senderAccNo" class="input-group-text">Account Number :</label>
+            </div>
+            <input type="text" class="form-control" name="senderAccountNumber" aria-describedby="basic-addon3" [(ngModel)]="formData.creditParty" id="senderAccNo" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">            
+                <label for="amount" class="input-group-text">Amount </label>
+                <label for="Amount" class="input-group-text">$</label>
+            </div>
+            <input type="number" class="form-control" name="Amount" [(ngModel)]="formData.transactionAmount" id="amount" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="Tmode" class="input-group-text">Transaction Mode :</label>
+                
+            </div>
+            <input type="text" name="Tmode" class="form-control" [(ngModel)]="formData.transactionMode" id="Tmode" required>
+        </div>
+        <div class="text-right">
+        <button type="submit" class="btn btn-outline-success">Send</button>
+        </div>
+    </form>
+</main>

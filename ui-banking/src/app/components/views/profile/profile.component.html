@@ -1,0 +1,39 @@
+<main>
+    <div class="top">
+        <span class="profilePic"><img src="/assets/images/man.png" alt="profile picture"></span>
+        <ul>
+            <li><span class="name">{{profileData.name}}</span></li>
+            <li><span class="balance">₹ {{profileData.balance}}</span></li>
+        </ul>
+        
+        
+    </div>
+    <div class="middle">
+        <div class="acno">
+            <span>Account Number:</span>
+            <span>{{profileData.accountNumber}}</span>
+        </div>
+        <div class="ifsc">
+            <span>IFSC code:</span>
+            <span>{{profileData.ifsc}}</span>
+        </div>
+        <div class="branch">
+            <span>Branch:</span>
+            <span>{{profileData.branch}}</span>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="number">
+            <span>Number:</span>
+            <span>{{profileData.number}}</span>
+        </div>
+        <div class="email">
+            <span>Email Address:</span>
+            <span>{{profileData.emailId}}</span>
+        </div>
+        <div class="address">
+            <span>Address:</span>
+            <span>{{profileData.address}}</span>
+        </div>
+    </div>
+</main>
