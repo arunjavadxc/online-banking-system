@@ -1,0 +1,65 @@
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card bg-white">
+                    <div class="card-body p-5">
+                        <form [formGroup]="registerForm" (ngSubmit)="signup()">
+                            <h2 class="fw-bold mb-2 text-uppercase ">Online Banking</h2>
+                            <p class=" mb-5">Regsitration Page!</p>
+                            <div class="mb-3">
+                                <label for="email" class="form-label ">Email address</label>
+                                <input formControlName="emailID" type="email" class="form-control" id="email"
+                                    placeholder="name@example.com">
+                            </div>
+                            <div *ngIf="f['emailID'].invalid && (f['emailID'].dirty || f['emailID'].touched)"
+                                class="alert alert-danger">
+                                <ng-container *ngFor="let error of error_messages.emailID">
+                                    <div class="error-message" *ngIf="f['emailID'].hasError(error.type)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label ">Password</label>
+                                <input formControlName="password" type="password" class="form-control" id="password"
+                                    placeholder="">
+                            </div>
+                            <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)"
+                                class="alert alert-danger">
+                                <ng-container *ngFor="let error of error_messages.password">
+                                    <div class="error-message" *ngIf="f['password'].hasError(error.type)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label ">Confirm-Password</label>
+                                <input formControlName="confirmPassword" type="password" class="form-control"
+                                    id="confirmPassword" placeholder="">
+                            </div>
+                            <div *ngIf="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)"
+                                class="alert alert-danger">
+                                <ng-container *ngFor="let error of error_messages.confirmPassword">
+                                    <div class="error-message" *ngIf="f['confirmPassword'].hasError(error.type)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <p class="small"><a class="text-primary" href="#">Forgot
+                                    password?</a></p>
+                            <div class="d-grid">
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </div>
+                        </form>
+                        <div>
+                            <p class="mb-0  text-center">Return to Login Page <a routerLink="/login"
+                                    class="text-primary fw-bold">Login</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
