@@ -20,7 +20,16 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-
+        <!-- Transactions -->
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+        
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/home/transactions">
+                <i class="bi bi-cash-coin"></i>
+                <span>Transactions</span></a>
+        </li>
+        
         <!-- Divider -->
         <!-- <hr class="sidebar-divider"> -->
 
@@ -62,7 +71,7 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in text-black"
                             aria-labelledby="userDropdown" id="userDropdown">
-                            <a class="dropdown-item">
+                            <a href="/home/profile" class="dropdown-item">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
