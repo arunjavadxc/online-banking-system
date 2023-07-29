@@ -22,6 +22,7 @@ import { StatementComponent } from './components/views/transactions/statement/st
 import { FormsModule } from '@angular/forms';
 import { BillComponent } from './components/views/transactions/bill/bill.component';
 import { ProfileComponent } from './components/views/profile/profile.component';
+import { SuccessComponent } from './components/views/transactions/success/success.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ProfileComponent } from './components/views/profile/profile.component';
     StatementComponent,
     BillComponent,
     ProfileComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,

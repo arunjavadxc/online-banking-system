@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { transfer } from 'src/app/models/transfer';
 
 @Component({
@@ -10,7 +11,8 @@ import { transfer } from 'src/app/models/transfer';
 })
 export class TransferComponent {
   formData : transfer = new transfer();
-  constructor(private http:HttpClient) { }
+  
+  constructor(private http:HttpClient, private router:Router) { }
   onSubmit() {
     const apiEndpoint = 'http://127.0.0.1:8081/api/v1/transactions'; 
     this.formData.debitParty='1432648625'
@@ -21,6 +23,8 @@ export class TransferComponent {
         console.log("Success")
         // Handle successful response from the API
         console.log('Response from API:', response);
+        
+        this.router.navigate(["/home/transactions/success"],{queryParams:{ transfer: JSON.stringify(response) }})
       },
       (error) => {
         // Handle errors, if any

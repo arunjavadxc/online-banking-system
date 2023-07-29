@@ -1,7 +1,6 @@
 <h1>Transfer Fund</h1>
 <main>
-    <h1>Transfer Money</h1>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" method="post">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label for="senderAccNo" class="input-group-text">Account Number :</label>
@@ -11,7 +10,7 @@
         <div class="input-group mb-3">
             <div class="input-group-prepend">            
                 <label for="amount" class="input-group-text">Amount </label>
-                <label for="Amount" class="input-group-text">$</label>
+                <label for="Amount" class="input-group-text">₹</label>
             </div>
             <input type="number" class="form-control" name="Amount" [(ngModel)]="formData.transactionAmount" id="amount" required>
         </div>

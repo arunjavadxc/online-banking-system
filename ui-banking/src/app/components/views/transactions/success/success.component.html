@@ -1,0 +1,5 @@
+<div>
+    <h2><i class="bi bi-check2-circle"></i>Success</h2>
+    <p *ngIf=bill>Bill payed Successfully</p>
+    <p *ngIf=response>Amount "<b>{{response.transactionAmount}}</b>" sent to "<b>{{response.receiver}}</b>" account successfully and your balance is "<b>₹ {{response.balance}}</b>"</p>
+</div>
