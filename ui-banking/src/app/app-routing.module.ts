@@ -14,7 +14,7 @@ import { ProfileComponent } from './components/views/profile/profile.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgetpwd', component: ForgetpasswordComponent },
