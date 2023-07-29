@@ -1,4 +1,4 @@
-package com.spring.oauth.configuration;
+package com.bank.ui.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
-import com.spring.oauth.keycloak.KeycloakLogoutHandler;
+import com.bank.ui.keycloak.KeycloakLogoutHandler;
 
 @Configuration
 @EnableWebSecurity
