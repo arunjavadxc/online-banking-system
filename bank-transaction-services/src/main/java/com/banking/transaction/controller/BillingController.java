@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RequestMapping(path = Constants.API_PREFIX_V1)
 @RestController
 public class BillingController {
@@ -22,7 +25,9 @@ public class BillingController {
     @PostMapping("/bill/pay")
     public ResponseEntity payBill(@RequestBody BillRequest request){
         String response = billingService.PayBill(request);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        Map<String,String> res= new HashMap<>();
+        res.put("Status",response);
+        return ResponseEntity.ok().body(res);
     }
 
     @PostMapping("/bill/add")
