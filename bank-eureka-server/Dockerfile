@@ -5,10 +5,11 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copying the jar file of the project in the container directory
-COPY ./target/bank-user-services-0.0.1-SNAPSHOT.jar /app
+# COPY ./target/banking-microservices-0.0.1-SNAPSHOT.jar /app
+COPY target/*.jar app.jar
 
 # Exposing the port number of the application
-EXPOSE 8403
+EXPOSE 8761
 
 # Setting the command to run the application
-CMD ["java", "-jar", "bank-user-services-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "banking-microservices-0.0.1-SNAPSHOT.jar"]
