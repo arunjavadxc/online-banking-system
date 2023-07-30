@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copying the jar file of the project in the container directory
 # COPY ./target/banking-microservices-0.0.1-SNAPSHOT.jar /app
-COPY target/*.jar app.jar
+COPY ./target/banking-microservices-0.0.1-SNAPSHOT.jar /app
 
 # Exposing the port number of the application
 EXPOSE 8761

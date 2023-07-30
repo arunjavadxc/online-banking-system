@@ -9,9 +9,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bank.ui</groupId>
-	<artifactId>bank-ui-oauth1</artifactId>
+	<artifactId>bank-ui-oauth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bank-ui-oauth1</name>
+	<name>bank-ui-oauth</name>
 	<description>UI Application</description>
 	<properties>
 		<java.version>11</java.version>

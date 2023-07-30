@@ -5,10 +5,10 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copying the jar file of the project in the container directory
-COPY ./target/bank-api-gateway-0.0.1-SNAPSHOT.jar /app
+COPY ./target/bank-ui-oauth-0.0.1-SNAPSHOT.jar /app
 
 # Exposing the port number of the application
-EXPOSE 9090
+EXPOSE 8402
 
 # Setting the command to run the application
-CMD ["java", "-jar", "bank-api-gateway-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "bank-ui-oauth-0.0.1-SNAPSHOT.jar"]
