@@ -1,12 +1,11 @@
-package com.banking.userManagement.services;
-
-import com.banking.userManagement.dto.AddUserResponse;
-import com.banking.userManagement.dto.UserRequest;
-import com.banking.userManagement.model.UserModel;
-
+package com.banking.usermanagement.services;
 
 import java.util.List;
 import java.util.Map;
+
+import com.banking.usermanagement.dto.AddUserResponse;
+import com.banking.usermanagement.dto.UserRequest;
+import com.banking.usermanagement.model.UserModel;
 
 
 public interface UserService {

@@ -1,18 +1,26 @@
-package com.banking.userManagement.controller;
-
-import com.banking.userManagement.dto.AddUserResponse;
-import com.banking.userManagement.dto.UserRequest;
-import com.banking.userManagement.model.UserModel;
-import com.banking.userManagement.services.UserService;
-import com.banking.userManagement.utils.Constants;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+package com.banking.usermanagement.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.banking.usermanagement.dto.AddUserResponse;
+import com.banking.usermanagement.dto.UserRequest;
+import com.banking.usermanagement.model.UserModel;
+import com.banking.usermanagement.services.UserService;
+import com.banking.usermanagement.utils.Constants;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j

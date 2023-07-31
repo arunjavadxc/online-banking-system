@@ -1,25 +1,27 @@
-package com.banking.userManagement.services;
-
-import com.banking.userManagement.dto.AddUserResponse;
-import com.banking.userManagement.dto.UserRequest;
-import com.banking.userManagement.exceptions.UserNotFoundException;
-import com.banking.userManagement.model.UserModel;
-import com.banking.userManagement.repo.userRepoImp;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.banking.usermanagement.services;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.banking.usermanagement.dto.AddUserResponse;
+import com.banking.usermanagement.dto.UserRequest;
+import com.banking.usermanagement.exceptions.UserNotFoundException;
+import com.banking.usermanagement.model.UserModel;
+import com.banking.usermanagement.repo.UserRepoImp;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Service
 @Slf4j
 public class UserServiceImp implements UserService{
     @Autowired
-    private userRepoImp userRepo;
+    private UserRepoImp userRepo;
     @Override
     public AddUserResponse addUser(UserRequest user) {
        UserModel User = userRepo.addUser(user);

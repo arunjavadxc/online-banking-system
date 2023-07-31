@@ -1,4 +1,4 @@
-package com.banking.userManagement.model;
+package com.banking.usermanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

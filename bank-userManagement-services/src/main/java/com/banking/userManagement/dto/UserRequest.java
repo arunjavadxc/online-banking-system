@@ -1,4 +1,4 @@
-package com.banking.userManagement.dto;
+package com.banking.usermanagement.dto;
 
 import lombok.Builder;
 import lombok.Data;

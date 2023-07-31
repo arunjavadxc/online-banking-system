@@ -9,12 +9,14 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.banking.transaction</groupId>
-	<artifactId>transaction-services</artifactId>
+	<artifactId>bank-transaction-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>transaction-services</name>
+	<name>bank-transaction-services</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
 		<spring-cloud.version>2021.0.7</spring-cloud.version>
 	</properties>
 	<dependencies>

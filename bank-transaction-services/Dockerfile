@@ -1,5 +1,5 @@
 # The version of Java
-FROM openjdk:11
+FROM openjdk:17-oracle
 
 # the working directory of the docker container
 WORKDIR /app

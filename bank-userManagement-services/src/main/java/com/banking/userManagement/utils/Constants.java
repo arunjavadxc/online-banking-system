@@ -1,4 +1,4 @@
-package com.banking.userManagement.utils;
+package com.banking.usermanagement.utils;
 
 public class Constants {
 

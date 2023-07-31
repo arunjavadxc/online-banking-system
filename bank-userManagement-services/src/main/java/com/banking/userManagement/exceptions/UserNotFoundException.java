@@ -1,7 +1,12 @@
-package com.banking.userManagement.exceptions;
+package com.banking.usermanagement.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(String a) {
-        super(a);
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6075213044578383770L;
+
+	public UserNotFoundException(String a) {
+		super(a);
+	}
 }

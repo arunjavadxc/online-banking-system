@@ -1,4 +1,4 @@
-package com.banking.userManagement.filter;
+package com.banking.usermanagement.filter;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

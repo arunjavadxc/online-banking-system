@@ -30,3 +30,12 @@ management:
       exposure:
         include: "*"
         
+eureka:
+  instance:
+    hostname: 172.18.176.1
+  client:
+#      registerWithEureka: false
+#      fetchRegistry: false
+      serviceUrl:
+        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+        
