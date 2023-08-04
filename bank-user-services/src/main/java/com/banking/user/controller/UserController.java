@@ -30,8 +30,9 @@ public class UserController {
 	private UserRequestMapperImpl userRequestMapperImpl = new UserRequestMapperImpl();
 
 	@GetMapping("/{userID}")
-	public User getUserByUserID(@PathVariable long userID) {
-		return userService.findByUserID(userID);
+	public ResponseEntity<Response<User>> getUserByUserID(@PathVariable long userID) {
+		Response<User> response = new Response<>(200, "Success", userService.findByUserID(userID));
+		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping("/save")

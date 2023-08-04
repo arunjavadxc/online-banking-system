@@ -50,7 +50,7 @@ public class UserController {
 	public ResponseEntity<Response<UserDTO>> getUserDetails() {
 		log.info("Entry into method getUserDetails() ");
 		UserDTO userDTO = new UserDTO();
-		userDTO.setUserID("1001");
+		userDTO.setUserID("1004");
 		userDTO.setEmailID("arun@gmail.com");
 		userDTO.setFirstName("Arun Kumar");
 		userDTO.setLastName("Venkatesan");

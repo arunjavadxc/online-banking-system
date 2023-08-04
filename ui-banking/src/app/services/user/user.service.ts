@@ -13,7 +13,7 @@ export class UserService {
   }
 
   getUserByUserID(userID: string) {
-    return this.apiService.getRequest('user/' + userID);
+    return this.apiService.getRequest('/user/api/v1/user/' + userID);
   }
 
   saveUser(data: any) {

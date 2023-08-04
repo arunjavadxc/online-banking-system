@@ -29,7 +29,17 @@ export class HomeComponent implements OnInit{
       this.user = response.body.responseObj;
       console.log('User response ->' + JSON.stringify(this.user));
       localStorage.setItem('user_obj',JSON.stringify(this.user));
+
+      /**
+       * Get the account details of the user
+       */
+      this.userService.getUserByUserID(this.user.userID).subscribe((response) =>{
+        console.log('Complete user details ->' + JSON.stringify(response.body.responseObj));
+        localStorage.setItem('user_dtls_ac', JSON.stringify(response.body.responseObj));
+      });
     });
+
+
   }
 
   sideBarToggle() {   
