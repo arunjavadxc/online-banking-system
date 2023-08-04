@@ -1,6 +1,9 @@
 package com.banking.user.service.impl;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		userAccount.setBranch("CHENNAI");
 		userAccount.setIfsc(Constants.IFSC_CODE);
 		userAccount.setUser(savedUser);
-		
+
 		userAccountRepository.save(userAccount);
 
 		return savedUser;
@@ -73,4 +76,19 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findByEmailID(emailID);
 	}
 
+	@Override
+	public UserAccount findUserByAccNumber(String accountNumber) {
+		return userAccountRepository.findByAccountNumber(accountNumber);
+	}
+
+	@Override
+	public Map<String, Double> currentBalance(List<String> accountNumbers) {
+		return accountNumbers.stream().collect(Collectors.toMap(a -> a, a -> {
+			if (findUserByAccNumber(a) == null)
+				throw new NotFoundException("This " + a + " Account Number is not valid");
+			else
+				return this.findUserByAccNumber(a).getBalance();
+		}));
+
+	}
 }

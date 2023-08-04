@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit{
       this.user = response.body.responseObj;
       console.log('User response ->' + JSON.stringify(this.user));
       localStorage.setItem('user_obj',JSON.stringify(this.user));
-
+      this.username = this.user.firstName + this.user.lastName;
       /**
        * Get the account details of the user
        */
