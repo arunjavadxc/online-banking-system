@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit{
   sideBarToggled = false;
   public isCollapsed = false;
   user: any;
+  currentBalance : 0;
 
   constructor(
     private router: Router,

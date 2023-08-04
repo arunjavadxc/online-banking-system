@@ -20,4 +20,8 @@ export class UserService {
     return this.apiService.postRequest('user/save', data);
   }
 
+  getCurrentBalance(accountNumber: string) {
+    return this.apiService.getRequest('/user/api/v1/user/balance/' + accountNumber);
+  }
+
 }

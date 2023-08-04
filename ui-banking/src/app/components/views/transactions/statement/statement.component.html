@@ -10,8 +10,7 @@
                 <th scope="col">S.no</th>
                 <th scope="col" class="col-md-1">Date</th>
                 <th scope="col">Mode</th>
-                <th scope="col" class="col-md-4">Description</th>
-                <th scope="col">Deposed</th>
+                <th scope="col">Deposit</th>
                 <th scope="col">Withdraw</th>
                 <th scope="col">Balance</th>
             </tr>
@@ -19,9 +18,8 @@
         <tbody>
             <tr *ngFor="let transactions of transactions; let i = index">
             <th scope="row">{{i+1}}</th>
-            <td>{{transactions.transactionDate | date : 'dd-mm-yyyy'}}</td>
+            <td>{{transactions.transactionDate | date : 'dd-MM-yyyy'}}</td>
             <td>{{transactions.transactionMode}}</td>
-            <td>{{transactions.description}}</td>
             <td>{{transactions.amountDeposit}}</td>
             <td>{{transactions.amountWithdraw}}</td>
             <td>{{transactions.balanceAmount}}</td>
