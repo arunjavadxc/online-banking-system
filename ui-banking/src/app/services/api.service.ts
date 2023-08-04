@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 
 const baseURL = environment.apiUrl;
+const uiURL = environment.uiURL;
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,10 @@ export class ApiService {
 
     headerEntry: any;
     headers: HttpHeaders;
+
+    getUserRequest(url: string): Observable<any> {
+        return this.httpClient.get(uiURL + url, { headers: this.headers, observe: "response" });
+    }
 
     getRequest(url: string): Observable<any> {
         return this.httpClient.get(baseURL + url, { headers: this.headers, observe: "response" });

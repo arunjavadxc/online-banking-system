@@ -1,10 +1,6 @@
 package com.banking.user.model.request;
 
-import java.util.List;
-
 import javax.validation.constraints.NotEmpty;
-
-import com.banking.user.entity.UserRole;
 
 import lombok.Data;
 
@@ -22,7 +18,5 @@ public class UserSaveRequestDTO {
 	private String password;
 
 	private boolean userStatus = true;
-
-	private List<UserRole> userRoles;
 
 }

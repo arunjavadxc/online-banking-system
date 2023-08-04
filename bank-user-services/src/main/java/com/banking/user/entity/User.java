@@ -1,22 +1,18 @@
 package com.banking.user.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +20,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @Table(name = "m_user_dtls")
-@EqualsAndHashCode(exclude = {"userRoles"})
+//@EqualsAndHashCode(exclude = { "userRoles" })
+@EqualsAndHashCode(exclude = { "userAccount" })
 public class User implements Serializable {
 
 	/**
@@ -56,9 +53,13 @@ public class User implements Serializable {
 	@Column(name = "user_status")
 	private boolean userStatus;
 
-	@ManyToMany
-	@JoinTable(name = "mp_user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-//	@JsonIgnore
-	private Set<UserRole> userRoles = new HashSet<>();
-	
+//	@ManyToMany
+//	@JoinTable(name = "mp_user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+////	@JsonIgnore
+//	private Set<UserRole> userRoles = new HashSet<>();
+
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
+	private UserAccount userAccount;
+
 }

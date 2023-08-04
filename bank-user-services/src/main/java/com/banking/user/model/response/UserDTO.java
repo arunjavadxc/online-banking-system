@@ -1,11 +1,6 @@
 package com.banking.user.model.response;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.banking.user.entity.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -27,7 +22,5 @@ public class UserDTO {
 
 	private boolean userStatus;
 
-	@JsonIgnoreProperties("users")
-	private Set<UserRole> userRoles = new HashSet<>();
 
 }

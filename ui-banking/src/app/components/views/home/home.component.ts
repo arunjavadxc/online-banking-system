@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit{
   username : '';
   sideBarToggled = false;
   public isCollapsed = false;
+  user: any;
 
   constructor(
     private router: Router,
@@ -25,7 +26,9 @@ export class HomeComponent implements OnInit{
 
   getUserDetails() {
     this.userService.getLoggedInUserDtls().subscribe((response) => {
-      console.log(response.data);
+      this.user = response.body.responseObj;
+      console.log('User response ->' + JSON.stringify(this.user));
+      localStorage.setItem('user_obj',JSON.stringify(this.user));
     });
   }
 
