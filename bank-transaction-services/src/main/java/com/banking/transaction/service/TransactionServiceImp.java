@@ -68,7 +68,8 @@ public class TransactionServiceImp implements TransactionService {
 	}
 
 	private ResponseEntity<Integer> updateBalance(Map<String, Double> currentBalance) {
-		return rest.postForEntity(balanceBaseURL, currentBalance, Integer.class);
+		System.out.println("Balance update url ->" + balanceBaseURL + "/update");
+		return rest.postForEntity(balanceBaseURL + "/update", currentBalance, Integer.class);
 	}
 
 	@SneakyThrows
