@@ -1,12 +1,12 @@
 package com.bank.ui.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Data
 public class UserDTO {
 
+	private String userID;
+	
 	private String firstName;
 
 	private String middleName;
@@ -14,10 +14,5 @@ public class UserDTO {
 	private String lastName;
 
 	private String emailID;
-
-	@JsonIgnore
-	private String password;
-
-	private boolean userStatus;
 
 }

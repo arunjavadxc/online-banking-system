@@ -8,6 +8,10 @@ export class UserService {
 
   constructor(private apiService: ApiService) { }
 
+  getLoggedInUserDtls() {
+    return this.apiService.getRequest('/ui/api/v1/user/dtls');
+  }
+
   getUserByUserID(userID: string) {
     return this.apiService.getRequest('user/' + userID);
   }

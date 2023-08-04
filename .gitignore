@@ -164,26 +164,5 @@ buildNumber.properties
 /src/main/resources/static
 *.pack
 *.old
-bank-ui-oauth1/src/main/resources/static/3rdpartylicenses.txt
-bank-ui-oauth1/src/main/resources/static/735.456d48b3c5d5b992.js
-bank-ui-oauth1/src/main/resources/static/820.e421b278d838cc97.js
-bank-ui-oauth1/src/main/resources/static/assets/css/backup.scss
-bank-ui-oauth1/src/main/resources/static/assets/css/sb-admin-2.scss
-bank-ui-oauth1/src/main/resources/static/assets/images/bank 0.png
-bank-ui-oauth1/src/main/resources/static/assets/images/bank.png
-bank-ui-oauth1/src/main/resources/static/assets/images/bill.gif
-bank-ui-oauth1/src/main/resources/static/assets/images/female.png
-bank-ui-oauth1/src/main/resources/static/assets/images/inheritance.gif
-bank-ui-oauth1/src/main/resources/static/assets/images/man.png
-bank-ui-oauth1/src/main/resources/static/assets/images/transfer.gif
-bank-ui-oauth1/src/main/resources/static/bank 0.e470828669937881.png
-bank-ui-oauth1/src/main/resources/static/bootstrap-icons.02685dabe0850e40.woff2
-bank-ui-oauth1/src/main/resources/static/bootstrap-icons.8463cb1e163733b5.woff
-bank-ui-oauth1/src/main/resources/static/favicon.ico
-bank-ui-oauth1/src/main/resources/static/index.html
-bank-ui-oauth1/src/main/resources/static/main.6df7efd8af7af537.js
-bank-ui-oauth1/src/main/resources/static/polyfills.eddd134508612036.js
-bank-ui-oauth1/src/main/resources/static/runtime.ade70098a331809a.js
-bank-ui-oauth1/src/main/resources/static/scripts.d65ebebea4ad2106.js
-bank-ui-oauth1/src/main/resources/static/styles.ebcfa4feffd05272.css
-bank-ui-oauth1/src/main/resources/static/main.d4f8218578eac858.js
+!**/src/main/resources/static/**
+/bank-ui-oauth1/src/main/resources/static/**
