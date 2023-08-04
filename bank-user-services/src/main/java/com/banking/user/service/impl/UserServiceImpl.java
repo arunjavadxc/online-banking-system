@@ -91,4 +91,13 @@ public class UserServiceImpl implements UserService {
 		}));
 
 	}
+
+	@Override
+	public Integer updateBalance(Map<String, Double> balance) {
+		int numberOfAccountsUpdated = 0;
+		for (Map.Entry<String, Double> bal : balance.entrySet()) {
+			numberOfAccountsUpdated += userAccountRepository.updateBalance(bal.getValue(), bal.getKey());
+		}
+		return numberOfAccountsUpdated;
+	}
 }

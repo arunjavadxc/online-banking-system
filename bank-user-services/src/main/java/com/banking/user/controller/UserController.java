@@ -56,4 +56,10 @@ public class UserController {
 		return userService.findUserByAccNumber(accountNumber);
 	}
 
+	@PostMapping("/users/balance")
+	public ResponseEntity updateBalance(@RequestBody Map<String, Double> user) {
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(userService.updateBalance(user));
+	}
+
 }

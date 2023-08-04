@@ -18,7 +18,9 @@ public interface UserService {
 	User findByEmailID(String emailID);
 
 	UserAccount findUserByAccNumber(String accountNumber);
-	
-	Map<String,Double> currentBalance(List<String> accountNumbers);
+
+	Map<String, Double> currentBalance(List<String> accountNumbers);
+
+	Integer updateBalance(Map<String, Double> balance);
 
 }
