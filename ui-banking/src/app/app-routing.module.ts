@@ -14,22 +14,21 @@ import { ProfileComponent } from './components/views/profile/profile.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'forgetpwd', component: ForgetpasswordComponent },
+  { path: '', redirectTo: '/home/dashboard', pathMatch: 'full' },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'signup', component: SignupComponent },
+  // { path: 'forgetpwd', component: ForgetpasswordComponent },
   {
     path: 'home', component: HomeComponent,
-    children: [{
-      path: 'dashboard', component: DashboardComponent
-    },
-    {path:'transactions',component: TransactionsComponent},
-    {path:'transactions/transfer',component: TransferComponent},
-    {path:'transactions/statement',component:StatementComponent},
-    {path:'transactions/bill',component:BillComponent},
-    {path:'profile',component: ProfileComponent}
-    ]
+    children: [
+      { path: 'dashboard', component: DashboardComponent},
+      { path: 'transactions', component: TransactionsComponent },
+      { path: 'transfer', component: TransferComponent },
+      { path: 'bill', component: BillComponent },
+      { path: 'statement', component: StatementComponent }
+    ],
   },
+
 ];
 
 @NgModule({

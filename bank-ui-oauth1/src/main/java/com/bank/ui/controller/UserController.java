@@ -1,7 +1,12 @@
 package com.bank.ui.controller;
 
+import java.util.Map;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +26,29 @@ public class UserController {
 		log.info("Entry into method getUserDetails() ");
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+		System.out.println(auth.toString());
 		UserDTO userDTO = new UserDTO();
 		userDTO.setFirstName(auth.getName());
 
 		return userDTO;
+	}
+
+	@GetMapping(path = "/users")
+	public String getUserInfo() {
+
+		final DefaultOidcUser user = (DefaultOidcUser) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+
+		String userID = "";
+
+		OidcIdToken token = user.getIdToken();
+
+		Map<String, Object> customClaims = token.getClaims();
+
+		if (customClaims.containsKey("user_id")) {
+			userID = String.valueOf(customClaims.get("user_id"));
+		}
+		return userID;
 	}
 
 }
