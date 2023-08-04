@@ -53,6 +53,7 @@ public class TransactionServiceImp implements TransactionService {
 		if (updateBalance(currentBalance).getBody() == 2) {
 			return TransactionReqResponse.builder().transactionAmount(transResponse.getTransactionAmount())
 					.balance(transResponse.getDebitPartyBalance()).receiver(transResponse.getCreditParty()).build();
+
 		} else
 			return null;
 	}
