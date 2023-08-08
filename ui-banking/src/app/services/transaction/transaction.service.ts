@@ -16,4 +16,8 @@ export class TransactionService {
     return this.apiService.getRequest('/transaction/api/v1/transactions/' + accountNumber);
   }
 
+  billPayment(data: any) {
+    return this.apiService.postRequest('/transaction/api/v1/bill/pay', data);
+  }
+
 }

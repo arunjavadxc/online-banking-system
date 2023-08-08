@@ -1,4 +1,53 @@
-version: '1'
+version: '3'
 services:
-  springmicroservices:
-    image: 
+  # Online Bank Microservice
+  microservices:
+    image: bank-eureka-server
+    build: ./bank-eureka-server
+    ports:
+      - "8761:8761"
+    restart: always
+  
+  # API Gateway 
+  apigateway:
+    image: bank-api-gateway
+    build: ./bank-api-gateway
+    ports:
+      - "9090:9090"
+    restart: always
+  # Front end configuration
+  uiapplication:
+    image: bank-ui-oauth
+    build: ./bank-ui-oauth1
+    ports:
+      - "8401:8401"
+    restart: always
+    depends_on:
+      - microservices
+  # User Service 
+  userservices:
+    image: bank-user-services
+    build: ./bank-user-services
+    ports:
+      - "8403:8403"
+    restart: always
+    depends_on:
+      - microservices
+  
+  transactionservices:
+    image: bank-transaction-services
+    build: ./bank-transaction-services
+    ports:
+      - "8402:8402"
+    restart: always
+    depends_on:
+      - microservices
+
+  notificationservices:
+    image: bank-notification-services
+    build: ./bank-notification-services
+    ports:
+      - "8405:8405"
+    restart: always
+    depends_on:
+      - microservices
