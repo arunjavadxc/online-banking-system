@@ -91,6 +91,11 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.9</version>
 		</dependency>
+		<!-- Sleuth with Brave tracer implementation -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 		<!--<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
