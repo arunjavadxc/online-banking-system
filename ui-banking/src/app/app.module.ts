@@ -16,6 +16,7 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { HomeComponent } from './components/views/home/home.component';
 import { ForgetpasswordComponent } from './components/views/forgetpassword/forgetpassword.component';
+import { LoanComponent } from './components/views/loan/loan.component';
 import { TransactionsComponent } from './components/views/transactions/transactions.component';
 import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
@@ -35,6 +36,7 @@ import { ProfileComponent } from './components/views/profile/profile.component';
     HomeComponent,
     SignupComponent,
     ForgetpasswordComponent,
+    LoanComponent
     TransactionsComponent,
     TransferComponent,
     StatementComponent,
