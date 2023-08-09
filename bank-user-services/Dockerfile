@@ -8,7 +8,7 @@ WORKDIR /app
 COPY ./target/bank-user-services-0.0.1-SNAPSHOT.jar /app
 
 # Exposing the port number of the application
-EXPOSE 8080
+EXPOSE 8403
 
 # Setting the command to run the application
 CMD ["java", "-jar", "bank-user-services-0.0.1-SNAPSHOT.jar"]

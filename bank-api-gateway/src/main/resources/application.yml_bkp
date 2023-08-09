@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: bank-api-gateway
+ ## Gateway configuration
+  cloud:
+    gateway:
+      routes:
+      ## User Service
+      - id: bank-user-service
+        uri: lb://bank-user-services
+        predicates:
+        - Path=/user/**
+        filters:
+        - StripPrefix=1
+      ## Transaction Service
+      - id: bank-transaction-services
+        uri: lb://bank-transaction-services
+        predicates:
+        - Path=/transaction/**
+        filters:
+        - StripPrefix=1
+          
+ 
+server:
+  port: 9090
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+eureka:
+  instance:
+    hostname: 172.18.176.1
+  client:
+#      registerWithEureka: false
+#      fetchRegistry: false
+      serviceUrl:
+        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+        

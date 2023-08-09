@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ExportAsModule } from 'ngx-export-as';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,12 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { HomeComponent } from './components/views/home/home.component';
 import { ForgetpasswordComponent } from './components/views/forgetpassword/forgetpassword.component';
 import { LoanComponent } from './components/views/loan/loan.component';
+import { TransactionsComponent } from './components/views/transactions/transactions.component';
+import { TransferComponent } from './components/views/transactions/transfer/transfer.component';
+import { StatementComponent } from './components/views/transactions/statement/statement.component';
+import { FormsModule } from '@angular/forms';
+import { BillComponent } from './components/views/transactions/bill/bill.component';
+import { ProfileComponent } from './components/views/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,11 @@ import { LoanComponent } from './components/views/loan/loan.component';
     SignupComponent,
     ForgetpasswordComponent,
     LoanComponent
+    TransactionsComponent,
+    TransferComponent,
+    StatementComponent,
+    BillComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +49,9 @@ import { LoanComponent } from './components/views/loan/loan.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ExportAsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
