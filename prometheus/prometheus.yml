@@ -1,0 +1,21 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+
+scrape_configs:
+  - job_name: prometheus
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:9190']
+  - job_name: app
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [
+                  'host.docker.internal:8761','host.docker.internal:9090', 'host.docker.internal:8401', 'host.docker.internal:8402', 'host.docker.internal:8403', 'host.docker.internal:8404', 'host.docker.internal:8405',
+                  'localhost:8761','localhost:9090','localhost:8401','localhost:8402','localhost:8403', 'localhost:8404', 'localhost:8405']
