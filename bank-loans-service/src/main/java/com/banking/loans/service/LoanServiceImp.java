@@ -4,19 +4,24 @@ import com.banking.loans.Exceptions.LessThanDueDate;
 import com.banking.loans.Exceptions.LoanNotFoundException;
 import com.banking.loans.Exceptions.noLoanException;
 import com.banking.loans.dto.request.ReqApplyLoan;
+import com.banking.loans.dto.request.TransactionRequest;
 import com.banking.loans.dto.response.ResApplyLoan;
 import com.banking.loans.dto.response.ResBalance;
 import com.banking.loans.dto.response.ResRepay;
+import com.banking.loans.dto.response.TransactionReqResponse;
 import com.banking.loans.model.LoanModel;
 
 import com.banking.loans.repo.LoanRepoImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -25,7 +30,13 @@ import java.util.concurrent.TimeUnit;
 public class LoanServiceImp implements LoanService{
     @Autowired
     private LoanRepoImp repo;
+    @Autowired
+    private RestTemplate rest;
 
+    @Value("${transaction.base.url}")
+    private String TransactionBaseURL;
+    @Value("${bank.account.number}")
+    private String bankAccountNumber;
     @Override
     public ResApplyLoan applyLoan(ReqApplyLoan loan) {
         log.info(loan.toString());
@@ -60,15 +71,19 @@ public class LoanServiceImp implements LoanService{
                 .totalAmount(totalAmount)
                 .interest(interest)
                 .build();
+
         LoanModel response = repo.storeLoan(loanModel);
         log.info("Loan details {}",response.toString());
-        return ResApplyLoan.builder()
-                .typeOfLoan(response.getTypeOfLoan())
-                .numberOfMonth(response.getNumberOfMonth())
-                .interest(response.getInterest())
-                .EMIAmount(response.getEMIAmount())
-                .totalAmount(response.getTotalAmount())
-                .build();
+        if (transaction(loanModel,0)!=null) {
+            return ResApplyLoan.builder()
+                    .typeOfLoan(response.getTypeOfLoan())
+                    .numberOfMonth(response.getNumberOfMonth())
+                    .interest(response.getInterest())
+                    .EMIAmount(response.getEMIAmount())
+                    .totalAmount(response.getTotalAmount())
+                    .build();
+        }
+        return null;
     }
 
     @Override
@@ -105,29 +120,54 @@ public class LoanServiceImp implements LoanService{
         return null;
     }
 
-    private ResRepay payAndStore(LoanModel data,float penalty){
-        double repayAmount = penalty+ data.getEMIAmount();
+    private ResRepay payAndStore(LoanModel data,float penalty) {
+        double repayAmount = penalty + data.getEMIAmount();
+         if (transaction(data, repayAmount)!=null) {
+             LoanModel loan = LoanModel.builder().typeOfLoan(data.getTypeOfLoan())
+                     .numberOfMonth(data.getNumberOfMonth() - 1)
+                     .status("Pay")
+                     .date(new Date())
+                     .ACno(data.getACno())
+                     .EMIAmount(data.getEMIAmount())
+                     .totalAmount(data.getTotalAmount() - data.getEMIAmount())
+                     .interest(data.getInterest())
+                     .build();
+             LoanModel response = repo.storeLoan(loan);
+             LocalDateTime localDateTime = response.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+             LocalDateTime nextDate = localDateTime.plusDays(30);
+             Date date = Date.from(nextDate.atZone(ZoneId.systemDefault()).toInstant());
+             log.info(nextDate.toString());
+             return ResRepay.builder().nextPaymentDate(date)
+                     .pendingDue(response.getTotalAmount()).build();
+         }
+         return null;
+        }
 
-        LoanModel loan = LoanModel.builder().typeOfLoan(data.getTypeOfLoan())
-                .numberOfMonth(data.getNumberOfMonth()-1)
-                .status("Pay")
-                .date(new Date())
-                .ACno(data.getACno())
-                .EMIAmount(data.getEMIAmount())
-                .totalAmount(data.getTotalAmount()- data.getEMIAmount())
-                .interest(data.getInterest())
-                .build();
-        LoanModel response = repo.storeLoan(loan);
-        LocalDateTime localDateTime = response.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        LocalDateTime nextDate = localDateTime.plusDays(30);
-        Date date = Date.from(nextDate.atZone(ZoneId.systemDefault()).toInstant());
-        log.info(nextDate.toString());
-        return ResRepay.builder().nextPaymentDate(date)
-                .pendingDue(response.getTotalAmount()).build();
-    }
+        @Override
+        public ResBalance pendingDue (String accountNumber){
+            return ResBalance.builder().accountNumber(accountNumber).DueAmount(repo.pendingDue(accountNumber)).build();
+        }
 
-    @Override
-    public ResBalance pendingDue(String accountNumber) {
-        return ResBalance.builder().accountNumber(accountNumber).DueAmount(repo.pendingDue(accountNumber)).build();
+        private TransactionReqResponse transaction(LoanModel loan,double penality){
+            TransactionRequest request = null;
+            if (loan.getStatus().equals("Created")) {
+                request = TransactionRequest.builder().transactionAmount(loan.getEMIAmount())
+                        .billDetails("Loan amount deposit")
+                        .debitParty(bankAccountNumber)
+                        .transactionMode("Bank Transfer")
+                        .creditParty(loan.getACno())
+                        .build();
+
+            } else if (loan.getStatus().equals("Pay")) {
+                request = TransactionRequest.builder().transactionAmount(loan.getEMIAmount() + penality)
+                        .billDetails("Loan amount repay")
+                        .debitParty(loan.getACno())
+                        .transactionMode("Bank Transfer")
+                        .creditParty(bankAccountNumber)
+                        .build();
+
+            }
+
+            return rest.postForEntity(TransactionBaseURL + "/transactions", request, TransactionReqResponse.class).getBody();
+        }
     }
-}
