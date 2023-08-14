@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        Apply Loan
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="calculateLoan()">
+          <div class="form-group">
+            <label for="loanType">Type of Loan:</label>
+            <select class="form-control" id="loanType" [(ngModel)]="Loan.typeOfLoan" name="loanType">
+              <option value="personal">Personal Loan</option>
+              <option value="home">Home Loan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="loanAmount">Loan Amount:</label>
+            <input type="number" class="form-control" id="loanAmount" [(ngModel)]="Loan.amount" name="loanAmount" required>
+          </div>
+          <div class="form-group">
+            <label for="loanPeriod">Loan Period (months):</label>
+            <input type="number" class="form-control" id="loanPeriod" [(ngModel)]="Loan.numberOfMonth" name="loanPeriod" required>
+          </div>
+          <div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
