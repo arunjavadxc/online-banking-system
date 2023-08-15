@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +25,12 @@ import com.banking.user.service.UserService;
 import com.banking.user.utils.Constants;
 import com.banking.user.utils.Response;
 
+import lombok.extern.slf4j.Slf4j;
+
+@EnableAutoConfiguration
 @RequestMapping(path = Constants.USER_API_PREFIX)
 @RestController
+@Slf4j
 public class UserController {
 
 	@Autowired
@@ -35,6 +40,7 @@ public class UserController {
 
 	@GetMapping("/{userID}")
 	public ResponseEntity<Response<User>> getUserByUserID(@PathVariable long userID) {
+		log.info("Entry into get user id");
 		Response<User> response = new Response<>(200, "Success", userService.findByUserID(userID));
 		return ResponseEntity.ok(response);
 	}
