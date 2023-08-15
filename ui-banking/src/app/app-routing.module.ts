@@ -11,6 +11,10 @@ import { TransferComponent } from './components/views/transactions/transfer/tran
 import { StatementComponent } from './components/views/transactions/statement/statement.component';
 import { BillComponent } from './components/views/transactions/bill/bill.component';
 import { ProfileComponent } from './components/views/profile/profile.component';
+import { LoanComponent } from './components/views/loan/loan.component';
+import { ApplyComponent } from './components/views/loan/apply/apply.component';
+import { SuccessComponent } from './components/views/loan/success/success.component';
+import { PayComponent } from './components/views/loan/pay/pay.component';
 
 
 const routes: Routes = [
@@ -25,7 +29,11 @@ const routes: Routes = [
       { path: 'transactions', component: TransactionsComponent },
       { path: 'transfer', component: TransferComponent },
       { path: 'bill', component: BillComponent },
-      { path: 'statement', component: StatementComponent }
+      { path: 'statement', component: StatementComponent },
+      { path: 'loan', component:LoanComponent},
+      { path: 'loan/apply', component:ApplyComponent},
+      { path: 'loan/success', component:SuccessComponent},
+      { path: 'loan/pay', component:PayComponent}
     ],
   },
 
