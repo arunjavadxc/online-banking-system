@@ -22,3 +22,10 @@ services:
     # restart: unless-stopped
     # volumes:
     #   - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+
+  # Zipkin
+  zipkin-all-in-one:
+    image: openzipkin/zipkin:latest
+    restart: always
+    ports:
+      - "9411:9411"
