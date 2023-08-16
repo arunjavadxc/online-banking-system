@@ -14,6 +14,7 @@ export class PayComponent {
   payLoan(){
     this.loanService.payLoan(this.accountNumber).subscribe((response)=>{
       console.log(response);
+      alert(response);
     },
     (Error)=>{
       console.error(Error);
