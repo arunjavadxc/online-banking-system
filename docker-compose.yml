@@ -53,8 +53,8 @@ services:
       - microservices
 
   loanservices:
-    image: bank-notification-services
-    build: ./bank-notification-services
+    image: bank-loans-service
+    build: ./bank-loans-service
     ports:
       - "8406:8406"
     restart: always
