@@ -81,7 +81,7 @@ public class TransactionServiceImp implements TransactionService {
 		List<TransactionResponse> debit = transaction.getDebitedTransactions(accountNumber);
 		List<TransactionResponse> allTransactions = Stream.concat(credit.stream(), debit.stream())
 				.collect(Collectors.toList());
-		return allTransactions.stream().sorted(Comparator.comparing(TransactionResponse::getTransactionDate))
+		return allTransactions.stream().sorted(Comparator.comparing(TransactionResponse::getTransactionDate).reversed())
 				.collect(Collectors.toList());
 	}
 }
