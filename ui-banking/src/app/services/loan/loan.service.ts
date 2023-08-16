@@ -10,10 +10,10 @@ export class LoanService {
   constructor(private apiService: ApiService) {}
 
   applyLoan(data: loan) {
-    return this.apiService.postRequest('/api/v1/loan/apply', data);
+    return this.apiService.postRequest('/loan/api/v1/loan/apply', data);
   }
 
   payLoan(data: any) {
-    return this.apiService.postRequest('/api/v1/loan/pay', data);
+    return this.apiService.postRequest('/loan/api/v1/loan/pay', data);
   }
 }

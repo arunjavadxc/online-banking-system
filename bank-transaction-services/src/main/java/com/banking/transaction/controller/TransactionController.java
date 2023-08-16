@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
+import com.banking.transaction.dto.TransactionReqResponse;
 import com.banking.transaction.dto.TransactionRequest;
 import com.banking.transaction.service.TransactionService;
 import com.banking.transaction.utils.Constants;
@@ -36,13 +37,18 @@ public class TransactionController {
 		log.info(transactionRequest.toString());
 
 		try {
-			return new ResponseEntity<>(service.addTransacrtion(transactionRequest), HttpStatus.CREATED);
+			TransactionReqResponse transactionReqResponse = service.addTransacrtion(transactionRequest);
+			System.out.println(transactionReqResponse.toString());
+
+			return new ResponseEntity<>(transactionReqResponse, HttpStatus.CREATED);
 		} catch (HttpClientErrorException hce) {
 			System.out.println("Server response ::>"
 					+ hce.getLocalizedMessage().substring(hce.getLocalizedMessage().indexOf("{")));
 
 			Response response = new ObjectMapper().readValue(
 					hce.getLocalizedMessage().substring(hce.getLocalizedMessage().indexOf("{")), Response.class);
+			
+			System.out.println(response.toString());
 			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 		}
 

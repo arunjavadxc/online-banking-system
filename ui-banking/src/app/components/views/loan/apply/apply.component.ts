@@ -13,9 +13,9 @@ export class ApplyComponent {
   constructor(private loanService:LoanService,private route: Router){}
   calculateLoan(){
     console.log(this.Loan)
-    // let userAc = localStorage.getItem('user_dtls_ac') || '{}';
-    // this.Loan.accountNo = JSON.parse(userAc).userAccount.accountNumber;
-    this.Loan.accountNo="1432354780"
+    let userAc = localStorage.getItem('user_dtls_ac') || '{}';
+    this.Loan.accountNo = JSON.parse(userAc).userAccount.accountNumber;
+    // this.Loan.accountNo="1432354780"
     this.loanService.applyLoan(this.Loan).subscribe((response)=>{
       console.log(response)
       this.route.navigate(['home/loan/success'],{ queryParams: { data:JSON.stringify(response.body) } });
