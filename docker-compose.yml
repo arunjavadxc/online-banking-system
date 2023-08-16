@@ -51,3 +51,12 @@ services:
     restart: always
     depends_on:
       - microservices
+
+  loanservices:
+    image: bank-notification-services
+    build: ./bank-notification-services
+    ports:
+      - "8406:8406"
+    restart: always
+    depends_on:
+      - microservices
