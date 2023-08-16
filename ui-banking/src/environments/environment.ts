@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // apiUrl : 'http://localhost:9090/api/v1/'
-  // apiUrl : 'http://localhost:9090',
+  // apiUrl : 'http://localhost:8081',
   // uiURL: 'http://localhost:8401'
 
   // apiUrl : 'http://192.168.100.228:9090',
