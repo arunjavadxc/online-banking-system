@@ -4,7 +4,7 @@
         <button class="btn btn-primary" (click)="exportTable('pdf')">PDF</button>
         <button class="btn btn-primary" (click)="exportTable('xlsx')">Excel</button>
     </div>
-    <table class="table table-hover" id="userStatement">
+    <table class="table table-hover w-auto" id="userStatement">
         <thead>
             <tr>
                 <th scope="col">S.no</th>
@@ -18,7 +18,7 @@
         <tbody>
             <tr *ngFor="let transactions of transactions; let i = index">
             <th scope="row">{{i+1}}</th>
-            <td>{{transactions.transactionDate | date : 'dd-MM-yyyy'}}</td>
+            <td>{{transactions.transactionDate | date : 'dd-MM-yyyy HH:mm:ss'}}</td>
             <td>{{transactions.transactionMode}}</td>
             <td>{{transactions.amountDeposit}}</td>
             <td>{{transactions.amountWithdraw}}</td>

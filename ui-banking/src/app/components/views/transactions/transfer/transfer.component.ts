@@ -40,6 +40,8 @@ export class TransferComponent {
         console.log(response);
       });
 
+    }, (error) => {
+      alert('Transfer failed due to ' + error.message);
     });
   }
 }

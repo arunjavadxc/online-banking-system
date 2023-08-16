@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from 'src/app/services/transaction/transaction.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -10,8 +11,11 @@ export class DashboardComponent implements OnInit {
 
   currentBalance: number = 0;
   accountNumber: string;
+  totalDebits: number = 0;
+  totalCredits: number = 0;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private transactionService: TransactionService) { }
 
   ngOnInit() {
     let userAc = localStorage.getItem('user_dtls_ac') || '{}';
@@ -19,6 +23,7 @@ export class DashboardComponent implements OnInit {
     this.accountNumber = JSON.parse(userAc).userAccount.accountNumber;
 
     this.getCurrentBalance();
+    this.getAllTransactions();
   }
 
   getCurrentBalance() {
@@ -29,4 +34,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getAllTransactions() {
+    this.transactionService.getAllTransactionFroAccount(this.accountNumber).subscribe((response) => {
+      console.log(response);
+      let responseContent = response.body;
+      for(let val of responseContent) {
+        this.totalCredits += val.amountDeposit;
+        this.totalDebits += val.amountWithdraw;
+      }
+    })
+  }
 }

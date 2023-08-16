@@ -1,0 +1,3 @@
+Run using below command
+
+C:\Projects\POC\online-banking-system\prometheus>docker run --name prometheus -p 9190:9090 --network monitoring -v prometheus-volume:/prometheus -v C:\Projects\POC\online-banking-system\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus --config.file=/etc/prometheus/prometheus.yml

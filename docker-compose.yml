@@ -13,7 +13,7 @@ services:
     image: bank-api-gateway
     build: ./bank-api-gateway
     ports:
-      - "9090:9090"
+      - "9190:9190"
     restart: always
   # Front end configuration
   uiapplication:
